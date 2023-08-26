@@ -1,0 +1,57 @@
+
+
+.pickr {
+	place-content: center;
+	background: #8e9598;
+	display: grid;
+	padding: 2px;
+	--size: 30px;
+    border-radius: 50%;
+	border: 1px solid #fff;
+
+	width: var(--size);
+	height: var(--size);
+	min-width: var(--size);
+	min-height: var(--size);
+}
+
+.pickr svg {
+	fill: #fff;
+}
+
+.pickr .pcr-button {
+    overflow: hidden;
+    border-radius: 50%;
+	width: calc(var(--size) - 4px);
+	height: calc(var(--size) - 4px);
+	min-width: calc(var(--size) - 4px);
+	min-height: calc(var(--size) - 4px);
+}
+
+.pcr-app .pcr-interaction {
+	grid-gap: 10px;
+	margin: 10px -5px 0px;
+}
+
+.pcr-app .pcr-interaction input {
+	margin: 0px;
+}
+
+.pcr-app .pcr-interaction .pcr-save {
+	background: #84f442;
+	font-size: .9rem;
+	font-weight: 600;
+	padding: 7px 15px;
+	color: rgba(0, 0, 0, .8);
+}
+
+.pcr-app .pcr-interaction .pcr-clear {
+	font-size: .9rem;
+	font-weight: 600;
+	padding: 7px 15px;
+}
+
+.pcr-app .pcr-interaction input {
+	border-radius: 5px;
+	box-shadow: 0px 2.5px 10px 1px rgb(0 0 0 / 20%);
+}
