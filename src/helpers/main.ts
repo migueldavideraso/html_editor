@@ -94,7 +94,7 @@ export const isStyleValueNumeric = (string) => {
 	const unit = getValueByStyleKey(string)
 	const value = parseFloat(unit)
 
-	return value !== NaN && value?.constructor === Number
+  return String(value) === unit
 }
 
 

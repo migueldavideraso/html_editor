@@ -1,7 +1,7 @@
 
 
-import { allElementsStore } from '@/file_state/sections'
-import { reduceGroup } from '@/helpers/main.ts'
+import { allElementsStore } from '../file_state/sections'
+import { reduceGroup } from '../helpers/main'
 import { writable, get } from 'svelte/store'
 
 
