@@ -1,6 +1,6 @@
 
-import { writable } from 'svelte/store'
-import { reduceUnit, reduceGroup } from '@/helpers/main'
+import { writable, get } from 'svelte/store'
+import { reduceUnit, reduceGroup } from '../helpers/main'
 
 
 let changesData = {}
@@ -20,7 +20,9 @@ export const allElementsStore = function () {
   const currentVersion = JSON.parse(localStorage.getItem('html-editor-elements') || '{}')
 	const { subscribe, set, update } = writable(currentVersion)
 
-	return {
+  return {
+
+    get: () => get(allElementsStore),
 
 		subscribe,
 
@@ -56,7 +58,6 @@ export const allElementsStore = function () {
 
 allElementsStore.subscribe(state => {
 
-  console.log(state)
   localStorage.setItem('html-editor-elements', JSON.stringify(state))
 
   elementsById = state
@@ -164,11 +165,11 @@ const __deleteElement = (id) => {
 
 
 
-setInterval(() => {
+// setInterval(() => {
 
-	console.log(Object.values(changesData))
+// 	console.log(Object.values(changesData))
 
-}, 5000)
+// }, 5000)
 
 
 window.onkeydown = (e) => {
