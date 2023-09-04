@@ -4,14 +4,14 @@
 
 	// import('./events_controller/main')
 	import Element from './Element.svelte'
-	import { elementsChildrenState } from '@/global_state/sections'
+	import { elementsChildrenState } from '../../global_state/sections'
 	import { initHoverController } from './events_controller/hover_page_controller'
 
 	let pageElement = null
 	let elementsOfFirstLevel = []
 
 	elementsChildrenState.subscribe(state => {
-		elementsOfFirstLevel = state[null] || []
+		elementsOfFirstLevel = state['null'] || []
 	})
 
 
@@ -37,29 +37,9 @@
 		box-shadow:  var(--box-shadow);
 	}
 
-	.section_element {
-		display: flex;
-		background: #ebeaea;
-		border-radius: 5px;
-		padding: 10px 20px;
-		margin: 15px 20px;
-	}
-
-	.selected {
-		opacity: 1;
-	}
-
-
-
-
-
-
-
-
 	.page :global(.mask) {
 		position: fixed;
 		border-radius: 5px;
-		/*animation: mask_animation .5s;*/
 	}
 
 	.page :global(.mask) {
