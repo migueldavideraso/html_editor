@@ -10,8 +10,8 @@ export default defineConfig({
 		svelte()
 	],
 	resolve: {
-		alias: [
-			{ find: '@', replacement: path.resolve(__dirname, 'src') },
-		],
+    alias: {
+      ['@']: path.resolve('./src')
+    },
 	},
 })
