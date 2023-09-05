@@ -7,7 +7,7 @@
 	let sectionsOfFirstLevel = []
 
 	elementsChildrenState.subscribe(state => {
-		sectionsOfFirstLevel = state[null] || []
+		sectionsOfFirstLevel = state['null'] || []
 	})
 
 	let isCollapsed = true

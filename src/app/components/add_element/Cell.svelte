@@ -1,5 +1,5 @@
 
-<script>
+<script lang="ts">
 
 
 	import { onMount } from 'svelte'
@@ -14,15 +14,15 @@
 
 		cellMaskElement.setAttribute('draggable', 'true')
 
-		cellMaskElement.ondragstart = (e) => {
+		cellMaskElement.ondragstart = (e: MouseEvent) => {
 
 			e.stopPropagation()
 
-			cellMaskElement.ondragover = (e) => {}
+			cellMaskElement.ondragover = () => {}
 			addElementState.set({ component })
 		}
 
-		cellMaskElement.ondragend = (e) => {
+		cellMaskElement.ondragend = (e: MouseEvent) => {
 
 			e.stopPropagation()
 			e.preventDefault()

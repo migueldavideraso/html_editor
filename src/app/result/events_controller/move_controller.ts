@@ -5,6 +5,7 @@ import { getUID } from '@/helpers/main'
 import { setElement } from '@/file_state/sections'
 import { getElementChildrenStore, getElementDataStore } from '@/global_state/sections'
 import { addElementState, elementHoverState, elementHoverPositionState, dropState } from '@/global_state/move_element'
+import type { I_Element } from '@/types/main'
 
 
 
@@ -139,7 +140,7 @@ export const onDragLeave = (e) => {
 }
 
 
-export const onDragOver = (e, elementId) => {
+export const onDragOver = (e: DragEvent, elementId: I_Element['id']) => {
 
 	e.preventDefault()
 	e.stopPropagation()

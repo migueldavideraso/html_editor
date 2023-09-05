@@ -10,11 +10,11 @@ import { writable, get } from 'svelte/store'
 
 export const selectedSectionState = function () {
 
-	const { subscribe, set } = writable<I_Element['id']|null>(null)
+	const { subscribe, set } = writable<I_Element['id']>(null)
 
 	return {
 		subscribe,
-		set: (id) => {
+		set: (id: I_Element['id']) => {
 			set(id)
 		},
 	}

@@ -3,7 +3,6 @@
 <script lang="ts">
 
 	import { elementHoverState } from '@/global_state/move_element'
-	import { selectedSectionState } from '@/global_state/sections'
 	import { getBrightness } from '@/helpers/main'
 	import { onMount, onDestroy } from 'svelte'
 
@@ -17,8 +16,8 @@
 	let lockMouseOver = false
 	let allowShowMask = true
 	let isMouseOver = false
+	let brightness = false
 	let maskElement = null
-	let brightness = 0
 
 	let currentState = 'hide' // or show
 
@@ -107,7 +106,7 @@
 
 	document.addEventListener(
 		'scroll',
-		(e) => {
+		() => {
 			setMaskPosition()
 		},
 		true
@@ -197,11 +196,11 @@
 
 		$: if (componentElement) {
 
-			componentElement.__setLockMouseOver = (val) => {
+			componentElement.__setLockMouseOver = (val: boolean) => {
 				lockMouseOver = val
 			}
 
-			componentElement.setLockMouseOver = (val) => {
+			componentElement.setLockMouseOver = (val: boolean) => {
 
 				isMouseOver = Boolean(val)
 				lockMouseOver = !Boolean(val)
@@ -211,7 +210,7 @@
 				}
 			}
 
-			componentElement.onmouseover = (e) => {
+			componentElement.onmouseover = () => {
 
 
 				if (lockMouseOver) {
@@ -239,9 +238,9 @@
 
 
 
-		const unsubscribeElementHoverState = elementHoverState.subscribe((elementId) => {
-			allowShowMask = !Boolean(elementId)
-		})
+		// const unsubscribeElementHoverState = elementHoverState.subscribe((elementId) => {
+		// 	allowShowMask = !Boolean(elementId)
+		// })
 
 
 </script>

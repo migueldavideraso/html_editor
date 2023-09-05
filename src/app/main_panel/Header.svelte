@@ -11,7 +11,7 @@
 
 	<span class="mask" />
 
-	<img class="icon" src="./large_icon.png"/>
+	<img class="icon" src="./large_icon.png" alt="icon" />
 	<div class="title">Default Title</div>
 
 </section>

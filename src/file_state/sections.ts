@@ -111,7 +111,7 @@ export const setElement = (id: I_Element['id'], newData: I_Element) => {
 }
 
 
-export const deleteElement = (id) => {
+export const deleteElement = (id: I_Element['id']) => {
 
 	const element = elementsById[id]
 	const children = elementsByParent[id] || []
@@ -128,9 +128,8 @@ export const deleteElement = (id) => {
 
 
 
-const __deleteElement = (id) => {
+const __deleteElement = (id: I_Element['id']) => {
 
-	const element = elementsById[id]
 	const children = elementsByParent[id] || []
 
 	changesData[id] = {
@@ -176,27 +175,15 @@ const __deleteElement = (id) => {
 
 
 
+window.onkeydown = (e: KeyboardEvent) => {
 
-
-
-
-
-// setInterval(() => {
-
-// 	console.log(Object.values(changesData))
-
-// }, 5000)
-
-
-window.onkeydown = (e) => {
-
-	if (e.keyCode === 90 && e.ctrlKey) {
+	if (e.key === 'z' && e.ctrlKey) {
 		console.log("Ctrl+z")
 		reverseState()
 		return
 	}
 
-	if (e.keyCode === 89 && e.ctrlKey) {
+	if (e.key === 'y' && e.ctrlKey) {
 		console.log("Ctrl+y")
 		return
 	}
@@ -213,6 +200,7 @@ const reverseState = () => {
 	const item = previousChangesData.pop()
 
   setElement(item.id, item.beforeData);
+
   console.log(item)
 
 	subsequentChangesData.push(item)

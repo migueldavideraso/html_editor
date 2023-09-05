@@ -2,7 +2,7 @@
 
 
 
-export const setMoveController = (args) => {
+export const setMoveController = (args: { element: HTMLElement, moveElement: HTMLElement, wrapperElement: HTMLElement}) => {
 
 	const {
 		element,
@@ -10,11 +10,7 @@ export const setMoveController = (args) => {
 		wrapperElement,
 	} = args
 
-	let onMove = false
-
 	moveElement.onpointerdown = () => {
-
-		onMove = true
 
 		moveElement.onpointermove = ({ movementX, movementY }) => {
 
@@ -44,8 +40,8 @@ export const setMoveController = (args) => {
 				return
 			}
 
-			element.style.top = `${parseInt(top) + movementY}px`
-			element.style.left = `${parseInt(left) + movementX}px`
+      element.style.top = `${parseInt(top.toFixed()) + movementY}px`
+			element.style.left = `${parseInt(left.toFixed()) + movementX}px`
 		}
 	}
 
@@ -53,7 +49,7 @@ export const setMoveController = (args) => {
 		moveElement.onpointermove = () => {}
 	}
 
-	window.addEventListener('mouseup', (e) => {
+	window.addEventListener('mouseup', () => {
 		moveElement.onpointermove = () => {}
 	})
 }
