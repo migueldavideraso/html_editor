@@ -9,6 +9,7 @@ import Grid from './elements/Grid.svelte'
 import Text from './elements/Text.svelte'
 import Box from './elements/Box.svelte'
 import App from './elements/App.svelte'
+import type { I_Elements_Styles } from '@/types/main'
 
 
 
@@ -30,7 +31,7 @@ export const getItemComponent = ({ element }) => {
 
 
 
-let allFileStyles = {}
+let allFileStyles: I_Elements_Styles
 
 allStylesStore.subscribe(state => {
 	allFileStyles = state

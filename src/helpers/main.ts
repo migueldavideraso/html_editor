@@ -1,6 +1,6 @@
 
 
-export const getUID = (length) => {
+export const getUID = (length: number) => {
 
 	length = length || Math.ceil((Math.random() * 100) + 50)
 
@@ -19,7 +19,7 @@ export const getUID = (length) => {
 }
 
 
-export const reduceUnit = (arr, key) => {
+export const reduceUnit = (arr: any[], key: string|number) => {
 
 	let result = {}
 
@@ -30,7 +30,7 @@ export const reduceUnit = (arr, key) => {
 	return result
 }
 
-export const reduceGroup = (arr, key) => {
+export const reduceGroup = (arr: any[], key: string|number) => {
 
 	let result = {}
 
@@ -47,16 +47,16 @@ export const reduceGroup = (arr, key) => {
 
 const styleUnits = ['rem', 'px', '%']
 
-export const getUnitIndex = (string) => {
+export const getUnitIndex = (styleValue: string) => {
 
 	for (const unit of styleUnits) {
-		const indexOf = string.indexOf(unit)
+		const indexOf = styleValue.indexOf(unit)
 
 		if (indexOf === -1) {
 			continue
 		}
 
-		if (string.slice(indexOf) !== unit) {
+		if (styleValue.slice(indexOf) !== unit) {
 			continue
 		}
 
@@ -67,54 +67,46 @@ export const getUnitIndex = (string) => {
 }
 
 
-export const getUnitByStyleKey = (string) => {
+export const getUnitByStyleKey = (styleValue: string) => {
 
-	string = string || ''
+	styleValue = styleValue || ''
 
-	const index = getUnitIndex(string)
+	const index = getUnitIndex(styleValue)
 
-	return index > -1 ? string.slice(index) : ''
+	return index > -1 ? styleValue.slice(index) : ''
 }
 
-export const getValueByStyleKey = (string) => {
+export const getValueByStyleKey = (styleValue: string) => {
 
-	string = string || ''
+	const index = getUnitIndex(styleValue)
 
-	const index = getUnitIndex(string)
-
-	return index > -1 ? string.slice(0, index) : ''
+	return index > -1 ? styleValue.slice(0, index) : ''
 }
 
-export const isStyleValueNumeric = (string) => {
+export const isStyleValueNumeric = (styleValue: string) => {
 
-	if (!string) {
+	if (!styleValue) {
 		return true
 	}
 
-	const unit = getValueByStyleKey(string)
+	const unit = getValueByStyleKey(styleValue)
 	const value = parseFloat(unit)
 
   return String(value) === unit
 }
 
 
+export const isHexadecimalColor = (colorValue: string) => {
 
-export const isHexadecimalColor = (string) => {
-
-	if (!string) {
+	if (!colorValue) {
 		return true
 	}
 
-	return string.indexOf('#') === 0 && (string.length === 7 || string.length === 4)
+	return colorValue.indexOf('#') === 0 && (colorValue.length === 7 || colorValue.length === 4)
 }
 
 
-export const getBrightness = (color) => {
-
-	// var color = [100, 255, 255];
-	// var brightness = (color[0] + color[0] + color[1] + color[2] + color[2] + color[2]) / 6
-
-	// brightness * .1
+export const getBrightness = (color: string) => {
 
 	if (!color) {
 		return 255
@@ -123,22 +115,25 @@ export const getBrightness = (color) => {
 	let rgb = 0
 
 	if (color.indexOf('#') > -1) {
-		color = color.slice(1) // strip #
-		rgb = parseInt(color, 16) // convert rrggbb to decimal
+
+    color = color.slice(1) // strip #
+    rgb = parseInt(color, 16) // convert rrggbb to decimal
 	}
 	else if (color.indexOf('rgb') > -1) {
 
-		color = (
+    const colorElements:string|string[] = (
 			color.indexOf('rgba') > -1 ?
 			color.slice(5, -1).split(',') :
 			color.slice(4, -1).split(',')
 		)
 
-		color = (color[0] | 1 << 8).toString(16).slice(1) + 
-		(color[1] | 1 << 8).toString(16).slice(1) + 
-		(color[2] | 1 << 8).toString(16).slice(1)
+		const rgbColor = (
+      (parseInt(colorElements[0]) | 1 << 8).toString(16).slice(1) + 
+      (parseInt(colorElements[1]) | 1 << 8).toString(16).slice(1) + 
+      (parseInt(colorElements[2]) | 1 << 8).toString(16).slice(1)
+    )
 
-		rgb = parseInt(color, 16)
+		rgb = parseInt(rgbColor, 16)
 	}
 
 	const r = (rgb >> 16) & 0xff;  // extract red

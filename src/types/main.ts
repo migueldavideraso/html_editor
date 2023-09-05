@@ -1,11 +1,15 @@
 
 
+export const elementsTypes = [ 'app', 'section', 'grid', 'box', 'text', 'button' ] as const
+export type T_Element_Type = typeof elementsTypes[number];
+
 export interface I_Element {
 
   id: string
   name: string
   position: number
   parent: string|null
+  text?: string
   type: 'app'|'section'|'grid'|'box'|'text'
 
   styles: {
@@ -18,7 +22,7 @@ export interface I_New_Element_Data {
   name: string
   parent: null
   styles: {}
-  type: 'section'|'grid'|'box'|'text'|'button'
+  type: T_Element_Type
 }
 
 export interface I_Elements_Table {
@@ -40,4 +44,9 @@ export interface I_Elements_Changes_Table {
 }
 
 
-
+export type I_Elements_Styles = {
+  [key in T_Element_Type]: { [key: string]: string; };
+} & { 
+  'all': { [key: string]: string }
+  'page': { [key: string]: string }
+ }

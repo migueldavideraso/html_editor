@@ -1,9 +1,10 @@
 
-import { writable, get } from 'svelte/store'
+import type { I_Elements_Styles } from '@/types/main'
+import { writable } from 'svelte/store'
 
 export const allStylesStore = function () {
 
-	const { subscribe, set } = writable({
+	const { subscribe } = writable<I_Elements_Styles>({
 
 		page: {
 			'box-sizing': 'border-box',

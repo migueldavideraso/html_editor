@@ -3,10 +3,10 @@
 
 	import { onMount } from 'svelte'
 	import { elementHoverState, dropState } from '@/global_state/move_element'
-	import { onDrop, onDragLeave, onDragOver } from './move_controller.ts'
+	import { onDrop, onDragLeave, onDragOver } from './move_controller'
+    import type { I_Element } from '@/types/main';
 
-	export let elementId = null
-	export let selected = false
+	export let elementId: I_Element['id'] = null
 	export let allowDrag = false
 	export let allowDrop = false
 	export let componentElement = null
@@ -24,28 +24,28 @@
 		}
 
 		if (allowDrop) {
-			componentElement.ondragover = (e) => onDragOver(e, elementId)
-			componentElement.ondragleave = (e) => onDragLeave(e)
-			componentElement.ondrop = (e) => onDrop(e)
+			componentElement.ondragover = (e: DragEvent) => onDragOver(e, elementId)
+			componentElement.ondragleave = (e: DragEvent) => onDragLeave(e)
+			componentElement.ondrop = (e: DragEvent) => onDrop(e)
 		}
 
-		componentElement.ondragstart = (e) => {
+		componentElement.ondragstart = (e: DragEvent) => {
 
 			e.stopPropagation()
 			addDragMask()
 
-			componentElement.ondragover = (e) => {}
+			componentElement.ondragover = () => {}
 			dropState.set({ dragElementId: elementId })
 		}
 
 
-		componentElement.ondragend = (e) => {
+		componentElement.ondragend = (e: DragEvent) => {
 
 			e.stopPropagation()
 			e.preventDefault()
 
 			elementHoverState.set(null)
-			componentElement.ondragover = (e) => onDragOver(e)
+			componentElement.ondragover = (e: DragEvent) => onDragOver(e, elementId)
 
 			removeDragMask()
 		}

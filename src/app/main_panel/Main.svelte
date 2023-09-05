@@ -5,8 +5,6 @@
 	import { setMoveController } from '@/helpers/move_element'
 
 	import AddElementDropdown from '@/app/components/add_element/Main.svelte'
-	import Header from './Header.svelte'
-	import Options from './options/Main.svelte'
 
 	let moveElement = null
 	let wrapperElement = null
@@ -120,10 +118,10 @@
 		min-height: 40px;
 		border-radius: 50%;
 	}
-
+/* 
 	.show_hide_panel.show {
 		transform: rotate(-180deg);
-	}
+	} */
 
 </style>
 

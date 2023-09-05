@@ -7,7 +7,7 @@ import { writable, get } from 'svelte/store'
 
 export const elementHoverState = function () {
 
-	const { subscribe, set } = writable(null)
+	const { subscribe, set } = writable<I_Element['id']>(null)
 
 	let currentId = null
 
@@ -17,7 +17,7 @@ export const elementHoverState = function () {
 
 	return {
 		subscribe,
-		set: (id) => {
+		set: (id: I_Element['id']) => {
 			currentId !== id  && set(id)
 		},
 	}
@@ -39,14 +39,14 @@ export const elementHoverPositionState = function () {
 
 export const dropState = function () {
 
-  interface I_DropState { dragElementId: I_Element['id'], dropElementId: I_Element['id'], order: number }
+  interface I_DropState { dragElementId?: I_Element['id'], dropElementId?: I_Element['id'], order?: number }
 
 	const { subscribe, set } = writable<I_DropState>(null)
 
 	return {
 		subscribe,
 		get: () => get(dropState),
-		set: ({ dragElementId, dropElementId, order }) => {
+		set: ({ dragElementId, dropElementId, order }: I_DropState) => {
 			set({ dragElementId, dropElementId, order })
 		},
 	}
