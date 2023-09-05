@@ -1,4 +1,5 @@
 
+import type { I_Element } from '@/types/main'
 import { writable, get } from 'svelte/store'
 
 
@@ -38,7 +39,9 @@ export const elementHoverPositionState = function () {
 
 export const dropState = function () {
 
-	const { subscribe, set } = writable({})
+  interface I_DropState { dragElementId: I_Element['id'], dropElementId: I_Element['id'], order: number }
+
+	const { subscribe, set } = writable<I_DropState>(null)
 
 	return {
 		subscribe,
@@ -52,7 +55,7 @@ export const dropState = function () {
 
 export const addElementState = function () {
 
-	const { subscribe, set } = writable({})
+	const { subscribe, set } = writable<{ component: I_Element}>(null)
 
 	return {
 		subscribe,

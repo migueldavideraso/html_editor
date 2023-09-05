@@ -1,24 +1,33 @@
 
 import { writable, get } from 'svelte/store'
 import { reduceUnit, reduceGroup } from '../helpers/main'
+import type { I_Element, I_Elements_By_Parent_Table, I_Elements_Table } from '../types/main'
 
 
 let changesData = {}
 
-let elementsById = {}
-let elementsByParent = {}
+let elementsById: I_Elements_Table = {}
+let elementsByParent: I_Elements_By_Parent_Table = {}
 
 
 let previousChangesData = []
 let subsequentChangesData = []
 
 
+const defaultState: I_Element = {
+  id: 'app',
+  type: 'app',
+  name: 'App',
+  parent: null,
+  position: 1,
+  styles: {},
+}
 
 
 export const allElementsStore = function () {
 
   const currentVersion = JSON.parse(localStorage.getItem('html-editor-elements') || '{}')
-	const { subscribe, set, update } = writable(currentVersion)
+  const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(currentVersion || defaultState)
 
   return {
 
@@ -26,30 +35,33 @@ export const allElementsStore = function () {
 
 		subscribe,
 
-		update (id, section) {
-			update(state => {
+		update (id: I_Element['id'], element: I_Element) {
+			updateStore(state => {
 
-				const oldData = state[section.id] || {}
+				const oldData = state[id] || {}
 
-				state[section.id] = {
+				state[element.id] = {
 					...oldData,
-					...section,
+					...element,
 				}
 
 				return state
 			})
 		},
 
-		delete (id) {
+		delete (id: I_Element['id']) {
 
-			update((state) => {
+			updateStore((state) => {
 				delete state[id]
 				return state
 			})
 		},
 
-		set (arr) {
-			set(reduceUnit(arr, 'id'))
+		set (newElements: I_Element[]) {
+
+      const elementsHashTable = reduceUnit(newElements, 'id')
+
+      set(elementsHashTable)
 		},
 	}
 }()
@@ -58,7 +70,9 @@ export const allElementsStore = function () {
 
 allElementsStore.subscribe(state => {
 
-  localStorage.setItem('html-editor-elements', JSON.stringify(state))
+  const stringState = JSON.stringify(state)
+
+  localStorage.setItem('html-editor-elements', stringState)
 
   elementsById = state
 	elementsByParent = reduceGroup(Object.values(state), 'parent')
@@ -67,7 +81,7 @@ allElementsStore.subscribe(state => {
 
 
 
-export const setElement = (id, newData) => {
+export const setElement = (id: I_Element['id'], newData: I_Element) => {
 
 	const oldData = elementsById[id]
 	const changeType = oldData ? 'update' : 'create'
@@ -87,6 +101,8 @@ export const setElement = (id, newData) => {
 		beforeData: oldData,
 		type: changeType,
 	})
+
+  console.log(previousChangesData)
 
 	allElementsStore.update(id, {
 		...oldData,
@@ -195,6 +211,9 @@ const reverseState = () => {
 	}
 
 	const item = previousChangesData.pop()
+
+  setElement(item.id, item.beforeData);
+  console.log(item)
 
 	subsequentChangesData.push(item)
 

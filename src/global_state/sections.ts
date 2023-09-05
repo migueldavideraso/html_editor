@@ -1,5 +1,6 @@
 
 
+import type { I_Element, I_Elements_By_Parent_Table } from '@/types/main'
 import { allElementsStore } from '../file_state/sections'
 import { reduceGroup } from '../helpers/main'
 import { writable, get } from 'svelte/store'
@@ -9,7 +10,7 @@ import { writable, get } from 'svelte/store'
 
 export const selectedSectionState = function () {
 
-	const { subscribe, set } = writable(null)
+	const { subscribe, set } = writable<I_Element['id']|null>(null)
 
 	return {
 		subscribe,
@@ -23,7 +24,7 @@ export const selectedSectionState = function () {
 
 export const elementsChildrenState = function () {
 
-	const { subscribe, set } = writable({})
+	const { subscribe, set } = writable<I_Elements_By_Parent_Table>({})
 
 	allElementsStore.subscribe(state => {
 		set(
@@ -41,9 +42,9 @@ export const elementsChildrenState = function () {
 }()
 
 
-export const getElementChildrenStore = function (elementId) {
+export const getElementChildrenStore = function (elementId: I_Element['id']) {
 
-	const { subscribe, set } = writable({})
+	const { subscribe, set } = writable<I_Element[]>([])
 
 	elementsChildrenState.subscribe(state => {
 
@@ -61,12 +62,12 @@ export const getElementChildrenStore = function (elementId) {
 	}
 }
 
-export const getElementDataStore = function (elementId) {
+export const getElementDataStore = function (elementId: I_Element['id']) {
 
-	const { subscribe, set } = writable({})
+	const { subscribe, set } = writable<I_Element>(null)
 
 	allElementsStore.subscribe(state => {
-		set(state[elementId] || {})
+		set(state[elementId] || null)
 	})
 
 	return {

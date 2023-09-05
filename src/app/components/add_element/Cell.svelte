@@ -8,14 +8,9 @@
 	export let title = ''
 	export let component = {}
 
-	let dragMaskElement = null
 	let cellMaskElement = null
 
 	onMount(() => {
-
-		cellMaskElement.getElementId = () => {
-			return elementId
-		}
 
 		cellMaskElement.setAttribute('draggable', 'true')
 
@@ -33,7 +28,7 @@
 			e.preventDefault()
 
 			elementHoverState.set(null)
-			cellMaskElement.ondragover = (e) => onDragOver(e)
+			// cellMaskElement.ondragover = (e) => onDragOver(e)
 		}
 	})
 
