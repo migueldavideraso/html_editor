@@ -58,6 +58,7 @@ const setDropElementChildrenPosition = ({ args, dragElement }) => {
 		setElement(
 			element.id,
 			{
+        ...element,
 				position: index + 1,
 				parent: args.dropElementId,
 			}
@@ -79,6 +80,7 @@ const setDragElementChildrenPosition = ({ oldParent, args }) => {
 		setElement(
 			element.id,
 			{
+        ...element,
 				position: index + 1,
 			}
 		)
@@ -87,26 +89,30 @@ const setDragElementChildrenPosition = ({ oldParent, args }) => {
 
 
 
-export const onDrop = (e) => {
+export const onDrop = (e: DragEvent) => {
 
 	e.stopPropagation()
 	e.preventDefault()
 
 	const args = dropState.get()
-	const dragElement = getDragElement(args.dragElementId)
+
+  if (args.dragElementId == null || args.dropElementId == null) {
+    return
+  }
+
+  const dragElement = getDragElement(args.dragElementId)
 	const oldParent = dragElement.parent
 
 	setDragElementChildrenPosition({ args, oldParent })
 	setDropElementChildrenPosition({ args, dragElement })
-
 
 	// ------------------------------------------------------------------------------------------------
 	// Clear stores data
 	{
 
 		elementHoverState.set(null)
-		addElementState.set({})
-		dropState.set({})
+		addElementState.set(null)
+		dropState.set(null)
 	}
 	// ------------------------------------------------------------------------------------------------
 
@@ -144,17 +150,21 @@ export const onDragOver = (e, elementId) => {
 
 
 
-const getDragElement = (dragElementId) => {
+const getDragElement = (dragElementId: string) => {
 
 	if (dragElementId) {
 		return getElementDataStore(dragElementId).get()
 	}
 
 	const { component } = addElementState.get()
+  const randomNum = (Math.random() * 5).toFixed(0)
+  const randomLength = parseInt(randomNum) + 10
+  const randomUID = getUID(randomLength)
+
 	const element = {
 		...component,
 		parent: null,
-		id: `${component.type}_${getUID(parseInt(Math.random() * 5) + 10)}`
+		id: `${component.type}_${randomUID}`
 	}
 
 	return element
