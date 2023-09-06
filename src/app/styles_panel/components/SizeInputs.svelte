@@ -2,15 +2,17 @@
 <script lang="ts">
 
 	import { getUnitByStyleKey, getValueByStyleKey, isStyleValueNumeric } from '@/helpers/main'
+    import type { T_Unit } from '@/types/main';
 
-	export let onChange = () => {}
+	export let onChange: (val: string) => void = () => {}
 	export let showOptionTypes = true
 	export let optionValue = ''
-	export let units = [ 'px', 'rem', '%' ]
+	export let units: T_Unit[] = [ 'px', 'rem', '%' ]
 	export let optionsTypes = [ 'numeric', 'custom', 'unset', 'auto' ]
 
-	const inputs = {}
-	let optionType = 'custom'
+	const inputs: { [key: string]: HTMLInputElement|HTMLSelectElement } = {}
+
+  let optionType = 'custom'
 
 	if (optionValue === 'auto' || optionValue === 'unset') {
 		optionType = optionValue
@@ -63,7 +65,7 @@
 		<input
 			class="custom_input"
 			value={optionValue}
-			on:input={(e) => onChange(e.target.value)}
+			on:input={(e) => onChange(e.currentTarget.value)}
 		/>
 
 	{:else}
@@ -77,7 +79,7 @@
 		<select
 			class="options_select"
 			bind:value={optionType}
-			on:change={(e) => onChangeOptionsSelect(e.target.value)}
+			on:change={(e) => onChangeOptionsSelect(e.currentTarget.value)}
 		>
 
 			{#each optionsTypes as options (options)}

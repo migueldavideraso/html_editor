@@ -1,13 +1,15 @@
 
-<script>
+<script lang="ts">
+
+  import type { I_Element } from '@/types/main';
 
 	import StylesButton from '../../StylesButton.svelte'
 	import Item from './Item.svelte'
 
-	export let element = {}
+	export let element: I_Element
 
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
+	export let deleteStyleKeys: (arr: string[]) => void = () => {}
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
 
 	const boxShadow = element?.styles?.['box-shadow']
 	let items = boxShadow ? boxShadow.split(',') : []

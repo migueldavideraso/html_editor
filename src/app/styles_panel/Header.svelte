@@ -34,11 +34,11 @@
 <section class="header_section" bind:this={moveElement} >
 	<span class="element_name" > {element?.name || ''} </span>
 	<span style="flex: auto;" />
-	<span
+	<button
 		class="fas fa-{!isMinified ? 'minus' : 'window-maximize'} close"
 		on:click={() => isMinified = !isMinified}
 	/>
-	<span class="fas fa-times close" on:click={closePanel} />
+	<button class="fas fa-times close" on:click={closePanel} />
 </section>
 
 
@@ -70,5 +70,11 @@
 	.header_section .element_name:hover, .header_section .close:hover {
 		opacity: .8;
 	}
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+  }
 
 </style>

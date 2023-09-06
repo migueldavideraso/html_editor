@@ -1,13 +1,15 @@
 
-<script>
+<script lang="ts">
 
-	import StylesButton from '../../StylesButton.svelte'
+  import type { I_Element } from '@/types/main';
+
+  import StylesButton from '../../StylesButton.svelte'
 	import BorderInput from './BorderInput.svelte'
 
-	export let element = {}
+	export let element: I_Element
 
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
+	export let deleteStyleKeys: (arr: string[]) => void = () => {}
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
 
 	let border_type = 'None'
 
@@ -62,7 +64,7 @@
 
 		<select
 			bind:value={border_type}
-			on:change={e => onChangeBorder(e.target.value)}
+			on:change={e => onChangeBorder(e.currentTarget.value)}
 		>
 			<option>None</option>
 			<option>Border</option>

@@ -1,13 +1,15 @@
 
-<script>
+<script lang="ts">
+
+  import type { I_Element } from '@/types/main';
 
 	import StylesButton from '../../StylesButton.svelte'
 	import CornerInput from './CornerInput.svelte'
 
-	export let element = {}
+	export let element: I_Element
 
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
+	export let deleteStyleKeys: (arr: string[]) => void = () => {}
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
 
 	let corner_type = 'None'
 
@@ -59,7 +61,7 @@
 
 		<select
 			bind:value={corner_type}
-			on:change={e => onChangeCorner(e.target.value)}
+			on:change={e => onChangeCorner(e.currentTarget.value)}
 		>
 			<option>None</option>
 			<option>Corner</option>

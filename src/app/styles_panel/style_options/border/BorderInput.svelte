@@ -1,12 +1,12 @@
 
-<script>
+<script lang="ts">
 
 	import SizeInputs from '../../components/SizeInputs.svelte'
 	import ColorPicker from '../../components/ColorPicker.svelte'
 
-	export let value = ''
-	export let title = ''
-	export let onChange = () => {}
+	export let value: string = ''
+	export let title: string = ''
+	export let onChange: (value: string) => void = () => {}
 
 
 	const border = value || ''
@@ -52,7 +52,7 @@
 
 	<select
 		value={style || ''}
-		on:change={(e) => updateStyle(e.target. value)}
+		on:change={(e) => updateStyle(e.currentTarget. value)}
 	>
 		<option>solid</option>
 		<option>dashed</option>

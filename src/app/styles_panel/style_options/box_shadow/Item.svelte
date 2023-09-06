@@ -1,10 +1,10 @@
 
-<script>
+<script lang="ts">
 
 	import SizeInputs from '../../components/SizeInputs.svelte'
 	import ColorPicker from '../../components/ColorPicker.svelte'
 
-	export let item = ''
+	export let item: string = ''
 
 	let args = item.split(' ')
 	let xAxis = args[0]
@@ -52,7 +52,7 @@
 
 	<select
 		value={inset || ''}
-		on:change={(e) => inset = e.target.value}
+		on:change={(e) => inset = e.currentTarget.value}
 	>
 		<option value="">outline</option>
 		<option value="inset">inset</option>

@@ -1,11 +1,11 @@
 
-<script>
+<script lang="ts">
 
 	import SizeInputs from '../../components/SizeInputs.svelte'
 
-	export let value = ''
-	export let title = ''
-	export let onChange = () => {}
+	export let value: string = ''
+	export let title: string = ''
+	export let onChange: (value: string) => void = () => {}
 
 </script>
 

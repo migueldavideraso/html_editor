@@ -1,14 +1,12 @@
 
-<script>
+<script lang="ts">
+  
+  import type { I_Element } from '@/types/main';
 
 	import StylesButton from '../StylesButton.svelte'
 
-	export let element = {}
-
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
-
-
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 </script>
 
@@ -24,7 +22,7 @@
 
 			<select
 				value={element.styles['overflow-x'] || 'visible'}
-				on:change={(e) => changeStyleKey('overflow-x', e.target.value)}
+				on:change={(e) => changeStyleKey('overflow-x', e.currentTarget.value)}
 			>
 				<option value="visible" >Content will not be clipped</option>
 				<option value="scroll" >Add scrollbars</option>
@@ -40,7 +38,7 @@
 
 			<select
 				value={element.styles['overflow-y'] || 'visible'}
-				on:change={(e) => changeStyleKey('overflow-y', e.target.value)}
+				on:change={(e) => changeStyleKey('overflow-y', e.currentTarget.value)}
 			>
 				<option value="visible" >Content will not be clipped</option>
 				<option value="scroll" >Add scrollbars</option>

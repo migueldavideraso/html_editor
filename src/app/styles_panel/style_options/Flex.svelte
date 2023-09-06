@@ -1,12 +1,13 @@
 
+<script lang="ts">
 
-<script>
+  import type { I_Element } from '@/types/main';
 
 	import StylesButton from '../StylesButton.svelte'
 	import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let element = {}
-	export let changeStyleKey = () => {}
+	export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 	let allowShow = false
 
@@ -46,7 +47,7 @@
 			<div class="title"> Grow: </div>
 
 			<input
-				on:change={e => changeStyleKey('flex-grow', e.target.value)}
+				on:change={e => changeStyleKey('flex-grow', e.currentTarget.value)}
 				bind:value={element.styles['flex-grow']}
 				min="0"
 				type="number"
@@ -59,7 +60,7 @@
 			<div class="title"> Shrink: </div>
 
 			<input
-				on:change={e => changeStyleKey('flex-shrink', e.target.value)}
+				on:change={e => changeStyleKey('flex-shrink', e.currentTarget.value)}
 				bind:value={element.styles['flex-shrink']}
 				min="0"
 				type="number"
