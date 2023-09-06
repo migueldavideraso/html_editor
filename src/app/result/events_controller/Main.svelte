@@ -23,7 +23,7 @@
 		componentElement = eventsElement.parentElement
 		parentComponentElement = componentElement.parentElement
 
-		componentElement.onclick = (e) => {
+		componentElement.onclick = (e: MouseEvent) => {
 			e.stopPropagation()
 			selectedSectionState.set(selected ? null : elementId)
 		}
@@ -43,7 +43,6 @@
 	/>
 
 	<Move
-		{selected}
 		{allowDrop}
 		{allowDrag}
 		{elementId}

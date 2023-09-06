@@ -2,7 +2,6 @@
 
 <script lang="ts">
 
-	import { elementHoverState } from '@/global_state/move_element'
 	import { getBrightness } from '@/helpers/main'
 	import { onMount, onDestroy } from 'svelte'
 
