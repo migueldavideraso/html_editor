@@ -121,17 +121,22 @@ export const onDrop = (e: DragEvent) => {
 	// ------------------------------------------------------------------------------------------------
 	// Unlock hover event on old parent, that was locked by current hover drag element
 	{
-		const eventsElement = document.getElementById(`events_element_${oldParent}`)
+		const element: HTMLElement = document.getElementById(`events_element_${oldParent}`)
+    const parentElement: HTMLElement = element.parentElement
+    const eventsElement: HTMLElement & { __setLockMouseOver?: (lockMouseOver: boolean) => void } = {
+      __setLockMouseOver: null,
+      ...parentElement,
+    }
 
-		if (eventsElement && eventsElement?.parentElement?.__setLockMouseOver) {
-			eventsElement.parentElement.__setLockMouseOver(false)
+		if (eventsElement?.__setLockMouseOver) {
+			eventsElement.__setLockMouseOver(false)
 		}
 	}
 	// ------------------------------------------------------------------------------------------------
 }
 
 
-export const onDragLeave = (e) => {
+export const onDragLeave = (e: DragEvent) => {
 
 	e.stopPropagation()
 	e.preventDefault()

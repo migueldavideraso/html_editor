@@ -1,13 +1,10 @@
 
 <script>
 
-
-	// import('./events_controller/main')
 	import Element from './Element.svelte'
 	import { elementsChildrenState } from '../../global_state/sections'
 	import { initHoverController } from './events_controller/hover_page_controller'
 
-	let pageElement = null
 	let elementsOfFirstLevel = []
 
 	elementsChildrenState.subscribe(state => {
@@ -20,7 +17,7 @@
 </script>
 
 
-<section class="page" bind:this={pageElement} >
+<section class="page" >
 
 	{#each elementsOfFirstLevel as element (element.id)}
 		<Element elementId={element.id} />

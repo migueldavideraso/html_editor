@@ -26,11 +26,12 @@ export const elementHoverState = function () {
 
 export const elementHoverPositionState = function () {
 
-	const { subscribe, set } = writable(null)
+  type T_Positions = { x: number, y: number }
+	const { subscribe, set } = writable<T_Positions>(null)
 
 	return {
 		subscribe,
-		set: ({ x, y }) => {
+		set: ({ x, y }: T_Positions) => {
 			set({ x, y })
 		},
 	}
