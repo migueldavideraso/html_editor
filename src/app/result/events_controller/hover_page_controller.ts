@@ -1,15 +1,17 @@
 
 import { elementHoverState, elementHoverPositionState, dropState } from '@/global_state/move_element'
 
+type T_Positions = { x: number, y: number }
+type T_Children_Positions = { x: number, y: number, height: number, width: number, element: Element }
+
 let verificationInterval = null
 let unsubscribesFunctions = []
 
 let currentElementId = null
-let currentDOMElement = null
-let currentDropElement = null
+let currentDOMElement: Element = null
 
-let currentPosition = {}
-let childrensPositions = []
+let currentPosition: T_Positions
+let childrensPositions: T_Children_Positions[] = []
 
 
 

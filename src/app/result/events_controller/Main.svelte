@@ -6,12 +6,13 @@
 
 	import Hover from './Hover.svelte'
 	import Move from './Move.svelte'
+    import type { I_Element } from '@/types/main';
 
 	export let allowDrag = false
 	export let allowDrop = false
 	export let selected = false
-	export let elementId = ''
-	export let afterUpdateElement = () => {}
+	export let elementId: I_Element['id'] = ''
+	export let afterUpdateElement: (elementId: I_Element['id']) => void
 
 
 	let eventsElement = null

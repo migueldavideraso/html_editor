@@ -2,7 +2,9 @@
 
 <script lang="ts">
 
-	import { getBrightness } from '@/helpers/main'
+  import type { I_Element } from '@/types/main';
+
+  import { getBrightness } from '@/helpers/main'
 	import { onMount, onDestroy } from 'svelte'
 
 	export let parentComponentElement = null
@@ -10,7 +12,7 @@
 	export let selected = false
 	export let elementId = ''
 
-	export let afterUpdateElement = () => {}
+	export let afterUpdateElement: (elementId: I_Element['id']) => void
 
 	let lockMouseOver = false
 	let allowShowMask = true

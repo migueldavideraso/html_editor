@@ -2,18 +2,19 @@
 <script lang="ts">
 
 	import { selectedSectionState, getElementChildrenStore, getElementDataStore } from '@/global_state/sections'
-	import { afterUpdate, beforeUpdate, onMount } from 'svelte'
 	import { getItemComponent, getElementStyle, getStyles } from './controller'
-	import { getBrightness } from '@/helpers/main'
+	import { afterUpdate } from 'svelte'
 
 	import EventsController from './events_controller/Main.svelte'
+  import type { I_Element } from '@/types/main';
 
-	export let elementId = null
+	export let elementId: I_Element['id'] = null
 
-	let element = {}
-	let children = []
+	let element: I_Element
+	let children: I_Element[] = []
 	let selected = false
-	let afterUpdateElement = () => {}
+
+	let afterUpdateElement: (elementId: I_Element['id']) => {}
 
 	getElementChildrenStore(elementId).subscribe(state => {
 		children = state
