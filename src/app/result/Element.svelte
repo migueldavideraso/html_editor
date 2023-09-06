@@ -25,7 +25,9 @@
 	})
 
 	afterUpdate(() => {
-		afterUpdateElement(elementId)
+    if (typeof afterUpdateElement === 'function') {
+      afterUpdateElement(elementId)
+    }
 	})
 
 	const Component = getItemComponent({ element })
