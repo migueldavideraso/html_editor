@@ -1,14 +1,15 @@
 
-<script>
+<script lang="ts">
+  
+  import type { I_Element } from '@/types/main';
 
 	import ColorPicker from '../components/ColorPicker.svelte'
 	import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let changeStyleKey = () => {}
-	export let changeElementKey = () => {}
+	export let changeElementKey:(key: string, value: string) => void = () => {}
 
-	export let element = {}
-
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 </script>
 
@@ -46,11 +47,11 @@
 		<span class="title"> Text </span>
 	</section>
 
-		<input
-			class="text_input"
-			value={element.text}
-			on:input={(e) => changeElementKey('text', e.target.value)}
-		/>
+  <input
+    class="text_input"
+    value={element.text}
+    on:input={(e) => changeElementKey('text', e.currentTarget.value)}
+  />
 
 </section>
 

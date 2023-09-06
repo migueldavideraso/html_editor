@@ -1,13 +1,13 @@
 
-
-<script>
+<script lang="ts">
+  
+  import type { I_Element } from '@/types/main';
 
 	import StylesButton from '../StylesButton.svelte'
 	import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let element = {}
-	export let changeStyleKey = () => {}
-
+	export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 </script>
 

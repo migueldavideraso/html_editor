@@ -1,16 +1,15 @@
 
+<script lang="ts">
+  
+  import type { I_Element } from '@/types/main';
 
-<script>
-
-	import StylesButton from '../StylesButton.svelte'
+  import StylesButton from '../StylesButton.svelte'
 	import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let element = {}
-	export let changeStyleKey = () => {}
-
+  export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 </script>
-
 
 <StylesButton title="Padding" >
 
@@ -29,8 +28,6 @@
 
 		</div>
 
-
-
 		<div class="input_group">
 
 			<div class="title"> padding bottom: </div>
@@ -43,8 +40,6 @@
 			/>
 
 		</div>
-
-
 
 		<div class="input_group">
 
@@ -59,8 +54,6 @@
 
 		</div>
 
-
-
 		<div class="input_group">
 
 			<div class="title"> padding right: </div>
@@ -74,16 +67,6 @@
 
 		</div>
 
-
 	</section>
 
-
 </StylesButton>
-
-
-<style>
-
-
-</style>
-
-

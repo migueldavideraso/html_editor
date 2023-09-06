@@ -1,15 +1,14 @@
 
-
-
 <script lang="ts">
 
 	import '../color_picker.css'
+  import type { I_Element } from '@/types/main';
 
 	import { onMount } from 'svelte'
 	import { createEditor, getTextByHtml } from './controller'
 
-	export let element = {}
-	export let changeElementKey = () => {}
+	export let element: I_Element
+  export let changeElementKey:(key: string, value: string) => void = () => {}
 
 	let editor = null
 	let editorElement = null

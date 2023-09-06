@@ -5,9 +5,9 @@
 	import { selectedSectionState } from '@/global_state/sections'
 
 	export let element = {}
-	export let showAddButton = true
-	export let showMoveButton = true
-	export let showDeleteButton = true
+	// export let showAddButton = true
+	// export let showMoveButton = true
+	// export let showDeleteButton = true
 
 
 	const deleteElement = () => {

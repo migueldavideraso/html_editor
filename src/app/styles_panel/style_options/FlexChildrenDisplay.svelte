@@ -1,13 +1,13 @@
 
+<script lang="ts">
+    import type { I_Element } from '@/types/main';
 
-<script>
 
 	import StylesButton from '../StylesButton.svelte'
 	import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let element = {}
-	export let changeStyleKey = () => {}
-
+	export let changeStyleKey:(key: string, value: string) => void = () => {}
+	export let element: I_Element
 
 </script>
 
@@ -20,7 +20,7 @@
 
 		<select
 			bind:value={element.styles['flex-direction']}
-			on:change={e => changeStyleKey('flex-direction', e.target.value)}
+			on:change={e => changeStyleKey('flex-direction', e.currentTarget.value)}
 		>
 			<option value="row"> row </option>
 			<option value="row-reverse"> row reverse </option>
@@ -51,7 +51,7 @@
 
 		<select
 			bind:value={element.styles['flex-wrap']}
-			on:change={e => changeStyleKey('flex-wrap', e.target.value)}
+			on:change={e => changeStyleKey('flex-wrap', e.currentTarget.value)}
 		>
 			<option value="unset"> unset </option>
 			<option value="nowrap"> nowrap </option>
@@ -68,7 +68,7 @@
 
 		<select
 			bind:value={element.styles['align-content']}
-			on:change={e => changeStyleKey('align-content', e.target.value)}
+			on:change={e => changeStyleKey('align-content', e.currentTarget.value)}
 		>
 			<option value="unset"> unset </option>
 			<option value="flex-start"> start </option>
@@ -85,7 +85,7 @@
 
 		<select
 			bind:value={element.styles['justify-content']}
-			on:change={e => changeStyleKey('justify-content', e.target.value)}
+			on:change={e => changeStyleKey('justify-content', e.currentTarget.value)}
 		>
 			<option value="unset"> unset </option>
 			<option value="flex-start"> start </option>

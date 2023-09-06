@@ -1,5 +1,7 @@
 
-<script>
+<script lang="ts">
+  
+  import type { I_Element, I_Elements_Styles } from '@/types/main';
 
 	import Header from './Header.svelte'
 	import Styles from './Styles.svelte'
@@ -8,13 +10,13 @@
 	import { allElementsStore } from '@/file_state/sections'
 	import { selectedSectionState } from '@/global_state/sections'
 
-	export let elementId = null
+	export let elementId: I_Element['id'] = null
 	export let wrapperElement = null
 
-	let panelElement, moveElement = null
+	let allStyles: I_Elements_Styles = {}
+	let element: I_Element
+	let panelElement = null
 	let isMinified = false
-	let element = {}
-	let allStyles = {}
 	let elementsById = {}
 
 	$: if (panelElement && elementId) {

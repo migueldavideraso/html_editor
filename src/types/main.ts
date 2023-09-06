@@ -3,6 +3,10 @@
 export const elementsTypes = [ 'app', 'section', 'grid', 'box', 'text', 'button' ] as const
 export type T_Element_Type = typeof elementsTypes[number];
 
+
+export const units = [ 'px', 'rem', '%' ] as const
+export type T_Unit = typeof units[number];
+
 export interface I_Element {
 
   id: string
@@ -13,7 +17,7 @@ export interface I_Element {
   type: 'app'|'section'|'grid'|'box'|'text'
 
   styles: {
-    [key: string]: string|number
+    [key: string]: string
   },
 }
 
@@ -45,8 +49,10 @@ export interface I_Elements_Changes_Table {
 
 
 export type I_Elements_Styles = {
-  [key in T_Element_Type]: { [key: string]: string; };
+  [key in T_Element_Type]?: { [key: string]: string; };
 } & { 
-  'all': { [key: string]: string }
-  'page': { [key: string]: string }
+  'all'?: { [key: string]: string }
+  'page'?: { [key: string]: string }
  }
+
+

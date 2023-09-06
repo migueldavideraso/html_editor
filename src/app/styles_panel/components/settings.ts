@@ -1,7 +1,6 @@
 
 
 export const colorPickerSettings = {
-	theme: 'classic',
 	swatches: [
 		'rgba(0, 0, 0, 1)', 'rgba(255, 255, 255, 1)', 'rgba(244, 67, 54, 1)', 'rgba(233, 30, 99, 1)',
 		'rgba(156, 39, 176, 1)', 'rgba(103, 58, 183, 1)', 'rgba(63, 81, 181, 1)', 'rgba(3, 169, 244, 1)',

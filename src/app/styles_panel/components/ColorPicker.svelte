@@ -1,5 +1,5 @@
 
-<script>
+<script lang="ts">
 
 	import { onMount, onDestroy } from 'svelte'
 	import { colorPickerSettings } from './settings'
@@ -10,7 +10,7 @@
 	import './color_picker.css'
 
 	export let color = null
-	export let onChange = () => {}
+	export let onChange: (value: string) => void = () => {}
 
 	let picker = null
 	let pickerElement = null
@@ -23,11 +23,11 @@
 			...colorPickerSettings,
 		})
 
-		picker.on('change', (color, source, instance) => {
+		picker.on('change', (color: Pickr.HSVaColor) => {
 			onChange(color.toHEXA().toString())
 		})
 
-		picker.on('cancel', instance => {
+		picker.on('cancel', () => {
 			picker.hide()
 		})
 	})
