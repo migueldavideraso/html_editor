@@ -37,9 +37,16 @@ allStylesStore.subscribe(state => {
 	allFileStyles = state
 })
 
-export const getStyles = ({ element }) => {
+export const getStyles = (args) => {
 
-	element.styles = element.styles || {}
+  const { element } = args
+
+  if (element == null) {
+    // console.error('Element is undefined')
+    return 
+  }
+
+  element.styles = element.styles || {}
 
 	const allStylesStore = allFileStyles.all || {}
 	const elementStyles = allFileStyles[element.type] || {}
@@ -50,6 +57,11 @@ export const getStyles = ({ element }) => {
 
 
 export const getElementStyle = ({ element, styles }) => {
+
+  if (element == null) {
+    // console.error('Element is undefined')
+    return
+  }
 
 	let result = ''
 
