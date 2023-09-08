@@ -15,20 +15,28 @@ let previousChangesData = []
 let subsequentChangesData = []
 
 
-const defaultState: I_Element = {
-  id: 'app',
-  type: 'app',
-  name: 'App',
-  parent: null,
-  position: 1,
-  styles: {},
+const defaultState: I_Elements_Table = {
+  app : {
+    id: 'app',
+    type: 'app',
+    name: 'App',
+    parent: null,
+    position: 1,
+    styles: {
+			'overflow': 'auto',
+			'width': '100%',
+			'height': '100%',
+			'padding-top': '10px',
+			'padding-left': '10px',
+			'padding-right': '10px',
+			'padding-bottom': '10px',
+			'background-color': 'rgba(255, 255, 255, 1)',
+    },
+  }
 }
 
 
 export const allElementsStore = function () {
-
-
-  const elementsHashTable = reduceUnit(elementsProof, 'id')
 
   const currentVersion = JSON.parse(localStorage.getItem('html-editor-elements') || '{}')
   const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(currentVersion || defaultState)
