@@ -2,11 +2,12 @@
 <script lang="ts">
 
 
-	import { onMount } from 'svelte'
-	import { addElementState, elementHoverState } from '@/global_state/move_element'
+  import { onMount } from 'svelte'
+  import { addElementState, elementHoverState } from '@/global_state/move_element'
+  import type { I_Element } from '@/types/main';
 
 	export let title = ''
-	export let component = {}
+	export let component: I_Element
 
 	let cellMaskElement = null
 
@@ -28,7 +29,6 @@
 			e.preventDefault()
 
 			elementHoverState.set(null)
-			// cellMaskElement.ondragover = (e) => onDragOver(e)
 		}
 	})
 
