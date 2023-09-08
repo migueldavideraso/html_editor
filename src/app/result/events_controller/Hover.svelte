@@ -3,7 +3,7 @@
 <script lang="ts">
 
   import type { I_Element } from '@/types/main';
-
+  import { elementHoverState } from '@/global_state/move_element'
   import { getBrightness } from '@/helpers/main'
 	import { onMount, onDestroy } from 'svelte'
 
@@ -239,9 +239,9 @@
 
 
 
-		// const unsubscribeElementHoverState = elementHoverState.subscribe((elementId) => {
-		// 	allowShowMask = !Boolean(elementId)
-		// })
+		const unsubscribeElementHoverState = elementHoverState.subscribe((elementId) => {
+			allowShowMask = !Boolean(elementId)
+		})
 
 
 </script>

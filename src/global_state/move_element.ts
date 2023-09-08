@@ -31,7 +31,14 @@ export const elementHoverPositionState = function () {
 
 	return {
 		subscribe,
-		set: ({ x, y }: T_Positions) => {
+		set: (args: T_Positions) => {
+
+      if (args == null) {
+        set(null)
+        return
+      }
+
+      const { x, y } = args
 			set({ x, y })
 		},
 	}
@@ -47,7 +54,14 @@ export const dropState = function () {
 	return {
 		subscribe,
 		get: () => get(dropState),
-		set: ({ dragElementId, dropElementId, order }: I_DropState) => {
+		set: (args: I_DropState) => {
+
+      if (args == null) {
+        set(null)
+        return
+      }
+
+      const { dragElementId, dropElementId, order } = args
 			set({ dragElementId, dropElementId, order })
 		},
 	}
@@ -61,7 +75,14 @@ export const addElementState = function () {
 	return {
 		subscribe,
 		get: () => get(addElementState),
-		set: ({ component }) => {
+		set: (args: { component: I_Element }) => {
+
+      if (args == null) {
+        set(null)
+        return
+      }
+
+      const { component } = args
 			set({ component })
 		},
 	}

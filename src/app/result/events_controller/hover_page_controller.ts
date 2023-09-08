@@ -91,7 +91,7 @@ const getCurrentDropChild = () => {
 		dropElementState.position = position
 
 		{
-			const { dragElementId } = dropState.get()
+			const { dragElementId } = dropState.get() || {}
 
 			dropState.set({
 				dragElementId,
@@ -194,7 +194,7 @@ const getCurrentDropChild = () => {
 				return
 			}
 
-			if (currentPosition.x !== position.x || currentPosition.y !== position.y) {
+			if (currentPosition?.x !== position.x || currentPosition?.y !== position.y) {
 				currentPosition = position
 				setElementsChildrensPositons()
 			}
