@@ -39,10 +39,11 @@ const defaultState: I_Elements_Table = {
 export const allElementsStore = function () {
 
   const currentVersion = JSON.parse(localStorage.getItem('html-editor-elements') || '{}')
-  const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(currentVersion || defaultState)
+  const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(defaultState)
   // const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(elementsHashTable)
 
-
+  console.log(defaultState)
+  console.log(currentVersion)
 
 
   return {
@@ -85,6 +86,11 @@ export const allElementsStore = function () {
 
 
 allElementsStore.subscribe(state => {
+
+  if (Object.values(state).length == 0) {
+    return
+  }
+
 
   const stringState = JSON.stringify(state)
 
