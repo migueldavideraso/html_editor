@@ -2,6 +2,7 @@
 import { writable, get } from 'svelte/store'
 import { reduceUnit, reduceGroup } from '../helpers/main'
 import type { I_Element, I_Elements_By_Parent_Table, I_Elements_Table } from '../types/main'
+import { elementsProof } from '@/data'
 
 
 let changesData = {}
@@ -26,8 +27,15 @@ const defaultState: I_Element = {
 
 export const allElementsStore = function () {
 
+
+  const elementsHashTable = reduceUnit(elementsProof, 'id')
+
   const currentVersion = JSON.parse(localStorage.getItem('html-editor-elements') || '{}')
   const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(currentVersion || defaultState)
+  // const { subscribe, set, update: updateStore } = writable<I_Elements_Table>(elementsHashTable)
+
+
+
 
   return {
 
@@ -101,8 +109,6 @@ export const setElement = (id: I_Element['id'], newData: I_Element) => {
 		beforeData: oldData,
 		type: changeType,
 	})
-
-  console.log(previousChangesData)
 
 	allElementsStore.update(id, {
 		...oldData,

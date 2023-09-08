@@ -97,7 +97,7 @@ export const onDrop = (e: DragEvent) => {
 
 	const args = dropState.get()
 
-  if (args.dragElementId == null || args.dropElementId == null) {
+  if (args?.dragElementId == null || args?.dropElementId == null) {
     return
   }
 
