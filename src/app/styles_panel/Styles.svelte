@@ -1,108 +1,49 @@
-
 <script>
+	import { setElement as setFileElement } from "@/file_state/sections";
+	import { getOptions } from "./controller";
 
-	import { getOptions } from './controller'
-	import { setElement as setFileElement } from '@/file_state/sections'
+	export let element = null;
 
-	export let element = null
+	$: Options = getOptions(element);
 
-	$: Options = getOptions(element)
-
-	let _element = null
-	let showOptions = false
+	let _element = null;
+	let showOptions = false;
 
 	$: if (_element?.id !== element?.id) {
+		showOptions = false;
 
-		showOptions = false
-
-		setTimeout(function() {
-			_element = element
-			showOptions = true
+		setTimeout(function () {
+			_element = element;
+			showOptions = true;
 		}, 100);
-
 	}
-
 
 	const changeElementKey = (key, value) => {
-
-		setFileElement(
-			element.id,
-			{
-				[key]: value,
-			}
-		)
-	}
+		setFileElement(element.id, {
+			[key]: value,
+		});
+	};
 
 	const changeStyleKey = (key, value) => {
-
-		setFileElement(
-			element.id,
-			{
-				styles: {
-					...element.styles,
-					[key]: value,
-				}
-			}
-		)
-	}
+		setFileElement(element.id, {
+			styles: {
+				...element.styles,
+				[key]: value,
+			},
+		});
+	};
 
 	const deleteStyleKeys = (keys) => {
+		element.styles = element.styles || {};
 
-		element.styles = element.styles || {}
+		keys.forEach((key) => {
+			delete element.styles[key];
+		});
 
-		keys.forEach(key =>{
-			delete element.styles[key]
-		})
-
-		setFileElement(
-			element.id,
-			{ styles: element.styles }
-		)
-	}
-
+		setFileElement(element.id, { styles: element.styles });
+	};
 </script>
 
-
-<section class="styles_section">
-
-
-	{#if showOptions}
-		<Options
-			{element}
-			{changeStyleKey}
-			{deleteStyleKeys}
-			{changeElementKey}
-		/>
-	{/if}
-
-</section>
-
-
-
-<style>
-
-	.styles_section {
-		flex-direction: column;
-		height: inherit;
-		overflow: auto;
-		flex: auto;
-		display: flex;
-		grid-gap: 10px;
-	}
-
-	.styles_section :global(.elements_grid) {
-		display: grid;
-		grid-gap: 8px;
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.styles_section :global(.elements_grid .input_group) {
-		align-items: flex-start;
-		background: #c5c5c5;
-		padding: 3px 5px;
-		border-radius: 3px;
-		box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
-	}
-
-</style>
-
+{#if showOptions}
+	<Options {element} {changeStyleKey} {deleteStyleKeys} {changeElementKey} />
+{/if}

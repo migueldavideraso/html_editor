@@ -1,37 +1,28 @@
-
 <script>
+	import { elementsChildrenState } from "../../global_state/sections";
+	import Element from "./Element.svelte";
+	import { initHoverController } from "./events_controller/hover_page_controller";
 
-	import Element from './Element.svelte'
-	import { elementsChildrenState } from '../../global_state/sections'
-	import { initHoverController } from './events_controller/hover_page_controller'
+	let elementsOfFirstLevel = [];
 
-	let elementsOfFirstLevel = []
+	elementsChildrenState.subscribe((state) => {
+		elementsOfFirstLevel = state["null"] || [];
+	});
 
-	elementsChildrenState.subscribe(state => {
-		elementsOfFirstLevel = state['null'] || []
-	})
-
-
-	initHoverController()
-
+	initHoverController();
 </script>
 
-
-<section class="page" >
-
+<section class="page">
 	{#each elementsOfFirstLevel as element (element.id)}
 		<Element elementId={element.id} />
 	{/each}
-
 </section>
 
-
 <style>
-
 	.page {
 		width: 100%;
 		height: 100%;
-		box-shadow:  var(--box-shadow);
+		box-shadow: var(--box-shadow);
 	}
 
 	.page :global(.mask) {
@@ -43,7 +34,7 @@
 		opacity: 1;
 		background-size: 20px 20px;
 		animation: hover_element__lines 2s linear infinite;
-		background-color: rgba(0, 0, 0, .1);
+		background-color: rgba(0, 0, 0, 0.1);
 		background-image: linear-gradient(
 			45deg,
 			rgba(255, 255, 255, 0.15) 25%,
@@ -55,11 +46,11 @@
 			transparent
 		);
 
-		border: 1.5px solid rgba(255, 255, 255, .75);
+		border: 1.5px solid rgba(255, 255, 255, 0.75);
 	}
 
 	.page :global(.mask.brightness) {
-		border: 1.5px solid rgba(0, 0, 0, .75);
+		border: 1.5px solid rgba(0, 0, 0, 0.75);
 	}
 
 	.page :global(.mask.hover) {
@@ -74,8 +65,4 @@
 			background-position: 0 0;
 		}
 	}
-
-
-
 </style>
-
