@@ -11,46 +11,38 @@
 	export let deleteStyleKeys: (arr: string[]) => void = () => {}
   export let changeStyleKey:(key: string, value: string) => void = () => {}
 
+  const customBorders = [ 'border-top', 'border-left', 'border-right', 'border-bottom' ]
 	let border_type = 'None'
 
-
-	if (element.styles.border === 'none') {
+  if (customBorders.some(border => element.styles[border] && element.styles[border] !== 'none')) {
+		border_type = 'Custom Borders'
+  }
+	else if (element.styles.border === 'none') {
 		border_type = 'None'
 	}
 	else if (element.styles.border !== 'none') {
 		border_type = 'Border'
 	}
-	else {
-		border_type = 'Custom Borders'
-	}
 
-	const onChangeBorder = (value) => {
+	const onChangeBorder = (value: string) => {
 
 		if (value === 'None') {
-
-			deleteStyleKeys([
-				'border-top',
-				'border-left',
-				'border-right',
-				'border-bottom',
-			])
-
+			deleteStyleKeys(customBorders)
 			changeStyleKey('border', 'none')
 		}
 		else if (value === 'Border') {
-
-			element.styles['border'] = ''
-
-			deleteStyleKeys([
-				'border-top',
-				'border-left',
-				'border-right',
-				'border-bottom',
-			])
+			deleteStyleKeys(customBorders)
+			changeStyleKey('border', '1px solid #000000')
 		}
-		else {
-			changeStyleKey('border', 'none')
+		else if (value === 'Custom Borders') {
+      changeStyleKey('border', 'none')
 		}
+
+    // This update the border input value
+    border_type = ''
+    setTimeout(() => {
+      border_type = value
+    }, 100)
 	}
 
 

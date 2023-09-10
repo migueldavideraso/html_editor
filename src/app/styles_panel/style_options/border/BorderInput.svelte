@@ -14,23 +14,23 @@
 
 	let size = borderSections[0]
 	let style = borderSections[1]
-	let color = borderSections[2]
+	let color = borderSections.slice(2).join(' ') // The rgb color is separated by the split function
 
-	const updateBorder = () => {
+  const updateBorder = () => {
 		onChange(size && style && color ? `${size} ${style} ${color}` : '')
 	}
 
-	const updateSize = (value) => {
+	const updateSize = (value: string) => {
 		size = value
 		updateBorder()
 	}
 
-	const updateStyle = (value) => {
+	const updateStyle = (value: string) => {
 		style = value
 		updateBorder()
 	}
 
-	const updateColor = (value) => {
+	const updateColor = (value: string) => {
 		color = value
 		updateBorder()
 	}
