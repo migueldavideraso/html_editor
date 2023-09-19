@@ -41,6 +41,7 @@
 		gap: 0.75rem;
 		flex-direction: column;
 		overflow-y: auto;
+		min-width: 350px;
 	}
 
 	.container_app {
