@@ -44,6 +44,38 @@
 	};
 </script>
 
-{#if showOptions}
-	<Options {element} {changeStyleKey} {deleteStyleKeys} {changeElementKey} />
-{/if}
+<section class="styles_section">
+	{#if showOptions}
+		<Options
+			{element}
+			{changeStyleKey}
+			{deleteStyleKeys}
+			{changeElementKey}
+		/>
+	{/if}
+</section>
+
+<style>
+	.styles_section {
+		flex-direction: column;
+		height: inherit;
+		overflow: auto;
+		flex: auto;
+		display: flex;
+		grid-gap: 10px;
+	}
+
+	.styles_section :global(.elements_grid) {
+		display: grid;
+		grid-gap: 8px;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.styles_section :global(.elements_grid .input_group) {
+		align-items: flex-start;
+		background: #c5c5c5;
+		padding: 3px 5px;
+		border-radius: 3px;
+		box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
+	}
+</style>
