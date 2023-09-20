@@ -12,7 +12,6 @@
 	export let element = null
 
 	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
 
 </script>
 
@@ -35,5 +34,4 @@
 <Overflow
 	{element}
 	{changeStyleKey}
-	{deleteStyleKeys}
 />

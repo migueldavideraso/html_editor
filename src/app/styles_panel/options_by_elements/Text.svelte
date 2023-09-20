@@ -66,7 +66,6 @@
 <Overflow
 	{element}
 	{changeStyleKey}
-	{deleteStyleKeys}
 />
 
 <CustomButtons
