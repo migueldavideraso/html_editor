@@ -1,10 +1,9 @@
-<script>
-	import { setElement as setFileElement } from "@/file_state/sections";
-	import { getOptions } from "./controller";
+<script lang="ts">
+  import type { I_Element } from "@/types/main";
+  import { setElement as setFileElement } from "@/file_state/sections";
+  import Options from "./options_by_elements/Options.svelte";
 
-	export let element = null;
-
-	$: Options = getOptions(element);
+	export let element:I_Element
 
 	let _element = null;
 	let showOptions = false;
@@ -18,14 +17,16 @@
 		}, 100);
 	}
 
-	const changeElementKey = (key, value) => {
+	const changeElementKey = (key: string, value: string) => {
 		setFileElement(element.id, {
+      ...element,
 			[key]: value,
 		});
 	};
 
-	const changeStyleKey = (key, value) => {
+	const changeStyleKey = (key: string, value: string) => {
 		setFileElement(element.id, {
+      ...element,
 			styles: {
 				...element.styles,
 				[key]: value,
@@ -33,19 +34,24 @@
 		});
 	};
 
-	const deleteStyleKeys = (keys) => {
+	const deleteStyleKeys = (keys: string[]) => {
 		element.styles = element.styles || {};
 
 		keys.forEach((key) => {
 			delete element.styles[key];
 		});
 
-		setFileElement(element.id, { styles: element.styles });
+		setFileElement(element.id, {
+      ...element,
+      styles: element.styles
+    });
 	};
 </script>
 
 <section class="styles_section">
 	{#if showOptions}
+
+
 		<Options
 			{element}
 			{changeStyleKey}

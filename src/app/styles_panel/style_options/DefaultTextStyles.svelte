@@ -5,9 +5,10 @@
 
 	import TextEditor from '../components/text_editor/Main.svelte'
 	import DefaultBoxStyles from './DefaultBoxStyles.svelte'
+  import type { T_ChangeElementKey, T_ChangeStyleKey } from '@/types/style_functions';
 
-	export let changeStyleKey = () => {}
-	export let changeElementKey = () => {}
+	export let changeStyleKey: T_ChangeStyleKey
+	export let changeElementKey: T_ChangeElementKey
 
 	export let element: I_Element
 
