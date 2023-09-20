@@ -1,24 +1,15 @@
-
 <script>
-
-	export let isOptionsShowing = false
-
-
+	export let isOptionsShowing = false;
 </script>
 
-
-<section class="header_section {isOptionsShowing ? 'show' : 'hide'}" >
-
+<section class="header_section {isOptionsShowing ? 'show' : 'hide'}">
 	<span class="mask" />
 
 	<img class="icon" src="./large_icon.png" alt="icon" />
 	<div class="title">Default Title</div>
-
 </section>
 
-
 <style>
-
 	.header_section {
 		background-color: #ffffff;
 		align-items: center;
@@ -66,7 +57,7 @@
 
 	@keyframes mask_header_section_animation_hide {
 		0% {
-			opacity: .1;
+			opacity: 0.1;
 		}
 		100% {
 			opacity: 1;
@@ -93,6 +84,4 @@
 			padding: 0px;
 		}
 	}
-
 </style>
-
