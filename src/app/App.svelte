@@ -33,15 +33,17 @@
 	}
 
 	.main_container > aside {
-		padding: 0.75rem;
-		border-left-width: 1px;
-		border-left-color: black;
 		border-left-style: solid;
-		display: flex;
-		gap: 0.75rem;
 		flex-direction: column;
 		overflow-y: auto;
-		min-width: 350px;
+		display: flex;
+    z-index: 1;
+		gap: 10px;
+		padding: 10px;
+		min-width: 360px;
+		background: #eaebf2;
+		border-left-width: 1px;
+		border-left-color: rgb(172, 173, 188);
 	}
 
 	.container_app {
