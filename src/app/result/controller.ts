@@ -3,7 +3,7 @@
 import { allStylesStore } from '@/file_state/styles'
 
 
-import type { I_Elements_Styles } from '@/types/main'
+import type { I_Element, I_Elements_Styles } from '@/types/main'
 import App from './elements/App.svelte'
 import Box from './elements/Box.svelte'
 import Button from './elements/Button.svelte'
@@ -37,7 +37,7 @@ allStylesStore.subscribe(state => {
 	allFileStyles = state
 })
 
-export const getStyles = (args) => {
+export const getStyles = (args: { element: I_Element }) => {
 
   const { element } = args
 
