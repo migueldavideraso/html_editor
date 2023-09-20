@@ -1,8 +1,7 @@
 
-import { writable, get } from 'svelte/store'
-import { reduceUnit, reduceGroup } from '../helpers/main'
+import { get, writable } from 'svelte/store'
+import { reduceGroup, reduceUnit } from '../helpers/main'
 import type { I_Element, I_Elements_By_Parent_Table, I_Elements_Table } from '../types/main'
-import { elementsProof } from '@/data'
 
 
 let changesData = {}
@@ -19,7 +18,7 @@ const defaultState: I_Elements_Table = {
   app : {
     id: 'app',
     type: 'app',
-    name: 'App',
+    name: 'Page',
     parent: null,
     position: 1,
     styles: {
