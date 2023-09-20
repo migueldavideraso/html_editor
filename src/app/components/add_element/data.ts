@@ -40,4 +40,4 @@ export const componentsData = {
 		parent: null,
 		styles: { },
 	},
-}
+} as const
