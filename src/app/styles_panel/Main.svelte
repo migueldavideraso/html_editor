@@ -72,14 +72,18 @@
 	.styles_panel {
 		background-color: #ffffff;
 		flex-direction: column;
+    overflow: hidden;
 		display: flex;
-		width: 350px;
-		z-index: 9999;
+    flex: auto;
+		width: 340px;
+		z-index: 1;
 		grid-gap: 10px;
+    min-height: 400px;
 		padding-bottom: 10px;
 		border-radius: 7.5px;
-		box-shadow: var(--box-shadow);
 		border: var(--main-border);
+		box-shadow: var(--box-shadow);
+
 
 		/* Disable Select ------------ */
 

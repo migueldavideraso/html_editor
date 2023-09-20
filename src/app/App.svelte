@@ -33,15 +33,17 @@
 	}
 
 	.main_container > aside {
-		padding: 0.75rem;
-		border-left-width: 1px;
-		border-left-color: black;
 		border-left-style: solid;
-		display: flex;
-		gap: 0.75rem;
 		flex-direction: column;
 		overflow-y: auto;
-		min-width: 350px;
+		display: flex;
+    z-index: 1;
+		gap: 10px;
+		padding: 10px;
+		min-width: 360px;
+		background: #eaebf2;
+		border-left-width: 1px;
+		border-left-color: rgb(172, 173, 188);
 	}
 
 	.container_app {
@@ -56,7 +58,7 @@
 		color: rgba(0, 0, 0, 0.8);
 	}
 
-	:global(.app--button) {
+	.main_container :global(.app--button) {
 		justify-content: flex-start;
 		background: transparent;
 		align-items: center;
@@ -68,11 +70,11 @@
 		border: 1px solid rgba(0, 0, 0, 0.15);
 	}
 
-	:global(.app--button:hover) {
+	.main_container :global(.app--button:hover) {
 		opacity: 0.8;
 	}
 
-	:global(.app--options_section) {
+	.main_container :global(.app--options_section) {
 		position: relative;
 		padding: 10px;
 		min-height: 30px;
@@ -83,7 +85,7 @@
 		border-top: none;
 	}
 
-	:global(.app--main_options_section) {
+	.main_container :global(.app--main_options_section) {
 		padding: 10px;
 		margin: 0px 10px;
 		border-radius: 5px;
@@ -91,33 +93,33 @@
 		border: 1px solid rgba(0, 0, 0, 0.15);
 	}
 
-	:global(.app--main_options_section .main_title),
-	:global(.app--options_section .main_title) {
+	.main_container :global(.app--main_options_section .main_title),
+	.main_container :global(.app--options_section .main_title) {
 		font-size: 0.8rem;
 		font-weight: 600;
 		margin: 0px -5px -10px;
 	}
 
-	:global(.app--main_options_section .title),
-	:global(.app--options_section .title) {
+	.main_container :global(.app--main_options_section .title),
+	.main_container :global(.app--options_section .title) {
 		font-size: 0.78rem;
 		margin-bottom: -10px;
 	}
 
-	:global(.app--main_options_section .input_group),
-	:global(.app--options_section .input_group) {
+	.main_container :global(.app--main_options_section .input_group),
+	.main_container :global(.app--options_section .input_group) {
 		align-items: center;
 		flex-wrap: wrap;
 		display: flex;
 		grid-gap: 5px;
 	}
 
-	:global(.app--main_options_section textarea),
-	:global(.app--main_options_section select),
-	:global(.app--main_options_section input),
-	:global(.app--options_section textarea),
-	:global(.app--options_section select),
-	:global(.app--options_section input) {
+	.main_container :global(.app--main_options_section textarea),
+	.main_container :global(.app--main_options_section select),
+	.main_container :global(.app--main_options_section input),
+	.main_container :global(.app--options_section textarea),
+	.main_container :global(.app--options_section select),
+	.main_container :global(.app--options_section input) {
 		border: none;
 		padding: 2px;
 		font-size: 0.8rem;
@@ -126,8 +128,8 @@
 		box-shadow: 1px 1px 3px rgb(0 0 0 / 20%);
 	}
 
-	:global(.app--main_options_section textarea),
-	:global(.app--options_section textarea) {
+	.main_container :global(.app--main_options_section textarea),
+	.main_container :global(.app--options_section textarea) {
 		font-family: inherit;
 		resize: vertical;
 		width: 100%;
@@ -137,13 +139,13 @@
 		min-height: 25px;
 	}
 
-	:global(.app--main_options_section input),
-	:global(.app--options_section input) {
+	.main_container :global(.app--main_options_section input),
+	.main_container :global(.app--options_section input) {
 		max-width: 55px;
 	}
 
-	:global(.app--main_options_section input[type="number"]),
-	:global(.app--options_section input[type="number"]) {
+	.main_container :global(.app--main_options_section input[type="number"]),
+	.main_container :global(.app--options_section input[type="number"]) {
 		text-align: right;
 	}
 </style>
