@@ -14,8 +14,9 @@
 </script>
 
 <section class="app--main_options_section">
-	<button class="app_class--button" on:click={deleteElement}> Delete </button>
-	<button class="app_class--button"> Duplicar </button>
+
+  <button class="app_class--button" on:click={deleteElement}> Delete </button>
+	<button class="app_class--button"> Duplicate </button>
 
 	<button class="app_class--button"> Open Advanced Options </button>
 </section>
