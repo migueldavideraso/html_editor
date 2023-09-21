@@ -1,6 +1,7 @@
 
 import type { I_Element } from '@/types/main'
 import { writable, get } from 'svelte/store'
+import { selectedSectionState } from './sections'
 
 
 
@@ -85,5 +86,32 @@ export const addElementState = function () {
       const { component } = args
 			set({ component })
 		},
+	}
+}()
+
+
+
+export const allowShowMaskState = function () {
+
+	const { subscribe, set, update } = writable<boolean>(true)
+
+  const allow = () => set(true)
+  const dontAllow = () => set(false)
+  const toogle = () => update(state => !state)
+  
+	selectedSectionState.subscribe(state => {
+
+		if (state != null && state != '') {
+      allow()
+			return
+		}
+	})
+
+	return {
+		subscribe,
+    allow,
+    toogle,
+    dontAllow,
+		get: () => get(addElementState),
 	}
 }()
