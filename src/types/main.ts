@@ -9,9 +9,9 @@ export type T_Unit = typeof units[number];
 
 export interface I_Element {
 
-  id: string
+  id?: string
   name: string
-  position: number
+  position?: number
   parent: string|null
   text?: string
   type: 'app'|'section'|'grid'|'box'|'text'

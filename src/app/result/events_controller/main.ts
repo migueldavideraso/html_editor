@@ -1,12 +1,15 @@
 
 import { elementHoverState, elementHoverPositionState } from '@/global_state/move_element'
+import type { I_Element } from '@/types/main'
 
+type T_HTMLElement = HTMLElement & { getElementId?: () => I_Element['id'], parentElement: T_HTMLElement }
+type T_positions = { x: number, y: number, width?: number, height?: number, element?: T_HTMLElement }
 
-let currentElementId = null
-let currentDOMElement = null
-let currentDropElement = null
-let childrensPositions = []
-let currentPosition = {}
+let currentElementId: I_Element['id'] = null
+let currentDOMElement: T_HTMLElement = null
+let currentDropElement: T_HTMLElement = null
+let childrensPositions: T_positions[] = []
+let currentPosition: T_positions
 
 
 const removeDropElements = () => {
@@ -33,7 +36,7 @@ const setElementsChildrensPositons = () => {
 		.filter(el => el.querySelector('.events_element'))
 	)
 
-	children.forEach(el => {
+	children.forEach((el: T_HTMLElement) => {
 		const { x, y, width, height } = el.getBoundingClientRect()
 		childrensPositions.push({ x, width, y, height, element: el })
 	})
@@ -58,7 +61,7 @@ const getSideChildren = () => {
 
 const setDropElement = () => {
 
-	let element = null
+	let element: T_HTMLElement = null
 
 	for (const { x, width, y, height, element: children } of childrensPositions) {
 		if (

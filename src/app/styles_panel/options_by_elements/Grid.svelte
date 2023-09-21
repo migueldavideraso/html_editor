@@ -1,5 +1,5 @@
 
-<script>
+<script lang="ts" >
 
 	import Shadow from '../style_options/box_shadow/Main.svelte'
 	import Border from '../style_options/border/Main.svelte'
@@ -11,12 +11,13 @@
 	import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
 
 	import CustomButtons from '../CustomButtons.svelte'
-
+  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions';
+  
 
 	export let element = null
 
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
+  export let changeStyleKey: T_ChangeStyleKey
+  export let deleteStyleKeys: T_DeleteStyleKeys
 
 </script>
 
@@ -62,7 +63,6 @@
 <Overflow
 	{element}
 	{changeStyleKey}
-	{deleteStyleKeys}
 />
 
 <CustomButtons

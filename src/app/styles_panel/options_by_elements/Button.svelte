@@ -1,5 +1,5 @@
 
-<script>
+<script lang="ts" >
 
 	import DefaultButtonStyles from '../style_options/DefaultButtonStyles.svelte'
 
@@ -13,12 +13,12 @@
 
 	import CustomButtons from '../CustomButtons.svelte'
 
+  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions';
+
+	export let changeStyleKey: T_ChangeStyleKey
+  export let deleteStyleKeys: T_DeleteStyleKeys
 
 	export let element = null
-
-	export let changeStyleKey = () => {}
-	export let deleteStyleKeys = () => {}
-	export let changeElementKey = () => {}
 
 </script>
 
@@ -26,7 +26,6 @@
 <DefaultButtonStyles
 	{element}
 	{changeStyleKey}
-	{changeElementKey}
 />
 
 
@@ -66,7 +65,6 @@
 <Overflow
 	{element}
 	{changeStyleKey}
-	{deleteStyleKeys}
 />
 
 <CustomButtons
