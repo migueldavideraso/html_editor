@@ -6,12 +6,18 @@ import * as path from 'path'
 
 
 export default defineConfig({
-	plugins: [
+
+  plugins: [
 		svelte()
 	],
-	resolve: {
+
+  resolve: {
     alias: {
       ['@']: path.resolve('./src')
     },
 	},
+
+  preview: {
+    port: 8080,
+  },
 })
