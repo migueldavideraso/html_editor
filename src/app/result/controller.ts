@@ -1,7 +1,4 @@
-
-
 import { allStylesStore } from '@/file_state/styles'
-
 
 import type { I_Element, I_Elements_Styles } from '@/types/main'
 import App from './elements/App.svelte'
@@ -11,77 +8,65 @@ import Grid from './elements/Grid.svelte'
 import Section from './elements/Section.svelte'
 import Text from './elements/Text.svelte'
 
-
-
 const components = {
-	'section': Section,
-	'button': Button,
-	'grid': Grid,
-	'text': Text,
-	'box': Box,
-	'app': App,
+  section: Section,
+  button: Button,
+  grid: Grid,
+  text: Text,
+  box: Box,
+  app: App,
 }
-
-
-
 
 export const getItemComponent = ({ element }) => {
-	return components[element.type]
+  return components[element.type]
 }
-
-
 
 let allFileStyles: I_Elements_Styles
 
 allStylesStore.subscribe(state => {
-	allFileStyles = state
+  allFileStyles = state
 })
 
 export const getStyles = (args: { element: I_Element }) => {
-
   const { element } = args
-
-  if (element == null) {
-    // console.error('Element is undefined')
-    return 
-  }
-
-  element.styles = element.styles || {}
-
-	const allStylesStore = allFileStyles.all || {}
-	const elementStyles = allFileStyles[element.type] || {}
-	const styles = { ...allStylesStore, ...elementStyles, ...element.styles }
-
-	return styles
-}
-
-
-export const getElementStyle = ({ element, styles }) => {
 
   if (element == null) {
     // console.error('Element is undefined')
     return
   }
 
-	let result = ''
+  element.styles = element.styles || {}
 
-	for (const key in styles) {
-		const value = styles[key]
+  const allStylesStore = allFileStyles.all || {}
+  const elementStyles = allFileStyles[element.type] || {}
+  const styles = { ...allStylesStore, ...elementStyles, ...element.styles }
 
-		result += `\t ${key}: ${value};\n`
-	}
-
-	if (element.type === 'text') {
-		return `<style> .${element.id} { \n ${result} } ${getTextStyles({ element })} </style>`
-	}
-
-	return `<style> .${element.id} { \n ${result} } </style>`
+  return styles
 }
 
+export const getElementStyle = ({ element, styles }) => {
+  if (element == null) {
+    // console.error('Element is undefined')
+    return
+  }
+
+  let result = ''
+
+  for (const key in styles) {
+    const value = styles[key]
+
+    result += `\t ${key}: ${value};\n`
+  }
+
+  if (element.type === 'text') {
+    return `<style> .${element.id} { \n ${result} } ${getTextStyles({ element })} </style>`
+  }
+
+  return `<style> .${element.id} { \n ${result} } </style>`
+}
 
 const getTextStyles = ({ element }) => {
-
-	return `
+  return `
 		.${element.id} p {
 			margin: 0px;
 		}
@@ -123,4 +108,3 @@ const getTextStyles = ({ element }) => {
 		}
 	`
 }
-

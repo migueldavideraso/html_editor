@@ -1,61 +1,48 @@
-
 <script>
+  export let title = ''
 
+  let isCollapsed = false
 
-	export let title = ''
-
-	let isCollapsed = false
-
-	const setCollapse = () => {
-		isCollapsed = !isCollapsed
-	}
-
-
+  const setCollapse = () => {
+    isCollapsed = !isCollapsed
+  }
 </script>
 
-
 <section class="styles_content">
+  <button class="app--button" on:click={setCollapse}>
+    <span class="fas fa-angle-right {isCollapsed ? 'collaped' : ''}" />
+    {title}
+  </button>
 
-	<button class="app--button" on:click={setCollapse} >
-		<span class="fas fa-angle-right {isCollapsed ? 'collaped' : ''}" />
-		{title}
-	</button>
-
-	{#if isCollapsed}
-		<section class="app--options_section">
-			<slot />
-		</section>
-	{/if}
-
+  {#if isCollapsed}
+    <section class="app--options_section">
+      <slot />
+    </section>
+  {/if}
 </section>
 
-
-
 <style>
+  .styles_content {
+    flex-direction: column;
+    display: flex;
+  }
 
-	.styles_content {
-		flex-direction: column;
-		display: flex;
-	}
+  .app--button {
+    margin: 0px 10px;
+  }
 
-	.app--button {
-		margin: 0px 10px;
-	}
+  .app--button span {
+    transition: transform 0.3s linear;
+  }
 
-	.app--button span {
-		transition: transform .3s linear;
-	}
+  .app--button span.collaped {
+    transform: rotate(90deg);
+  }
 
-	.app--button span.collaped {
-		transform: rotate(90deg);
-	}
-
-	.app--options_section {
-		flex-direction: column;
-		overflow: auto;
-		display: flex;
-		grid-gap: 7.5px;
-	}
-
+  .app--options_section {
+    flex-direction: column;
+    overflow: auto;
+    display: flex;
+    grid-gap: 7.5px;
+  }
 </style>
-

@@ -1,86 +1,67 @@
-
 <script lang="ts">
+  import { getElementChildrenStore, getElementDataStore, selectedSectionState } from '@/global_state/sections'
+  import { afterUpdate } from 'svelte'
+  import { getElementStyle, getItemComponent, getStyles } from './controller'
 
-	import { selectedSectionState, getElementChildrenStore, getElementDataStore } from '@/global_state/sections'
-	import { getItemComponent, getElementStyle, getStyles } from './controller'
-	import { afterUpdate } from 'svelte'
+  import type { I_Element } from '@/types/main'
+  import EventsController from './events_controller/Main.svelte'
 
-	import EventsController from './events_controller/Main.svelte'
-  import type { I_Element } from '@/types/main';
+  export let elementId: I_Element['id'] = null
 
-	export let elementId: I_Element['id'] = null
+  let element: I_Element
+  let children: I_Element[] = []
+  let selected = false
 
-	let element: I_Element
-	let children: I_Element[] = []
-	let selected = false
+  let afterUpdateElement: (elementId: I_Element['id']) => {}
 
-	let afterUpdateElement: (elementId: I_Element['id']) => {}
+  getElementChildrenStore(elementId).subscribe(state => {
+    children = state
+  })
 
-	getElementChildrenStore(elementId).subscribe(state => {
-		children = state
-	})
+  getElementDataStore(elementId).subscribe(state => {
+    element = state
+  })
 
-	getElementDataStore(elementId).subscribe(state => {
-		element = state
-	})
-
-	afterUpdate(() => {
+  afterUpdate(() => {
     if (typeof afterUpdateElement === 'function') {
       afterUpdateElement(elementId)
     }
-	})
+  })
 
-	const Component = getItemComponent({ element })
+  const Component = getItemComponent({ element })
 
-	selectedSectionState.subscribe(state => {
+  selectedSectionState.subscribe(state => {
+    if (state === elementId) {
+      selected = true
+      return
+    }
 
-		if (state === elementId) {
-			selected = true
-			return
-		}
+    if (!state) {
+      selected = null
+      return
+    }
 
-		if (!state) {
-			selected = null
-			return
-		}
+    selected = false
+  })
 
-		selected = false
-	})
+  $: styles = getStyles({ element })
+  $: elementStyles = getElementStyle({ element, styles })
 
-	$: styles = getStyles({ element })
-	$: elementStyles = getElementStyle({ element, styles })
-
-	$: allowDrag = element?.type !== 'app'
-	$: allowDrop = element?.type !== 'text'
-	$: allowCreateEventsController = Boolean(element?.type)
-
-
+  $: allowDrag = element?.type !== 'app'
+  $: allowDrop = element?.type !== 'text'
+  $: allowCreateEventsController = Boolean(element?.type)
 </script>
 
 {@html elementStyles}
 
-<Component {element} >
+<Component {element}>
+  {#if allowCreateEventsController}
+    <EventsController bind:afterUpdateElement {selected} {elementId} {allowDrop} {allowDrag} />
+  {/if}
 
-	{#if allowCreateEventsController }
-
-		<EventsController
-			bind:afterUpdateElement
-			{selected}
-			{elementId}
-			{allowDrop}
-			{allowDrag}
-		/>
-
-	{/if}
-
-
-	{#if children?.length }
-
-		{#each children as element (element.id)}
-			<svelte:self elementId={element.id} />
-		{/each}
-
-	{/if}
-
+  {#if children?.length}
+    {#each children as element (element.id)}
+      <svelte:self elementId={element.id} />
+    {/each}
+  {/if}
 </Component>
-

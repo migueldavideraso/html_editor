@@ -1,175 +1,183 @@
-
-
 @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-
 body {
-	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-	position: relative;
-	margin: 0px;
-	font-size: 16px;
-	min-width: 320px;
-	font-weight: 400;
-	min-height: 100vh;
-	line-height: 24px;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  position: relative;
+  margin: 0px;
+  font-size: 16px;
+  min-width: 320px;
+  font-weight: 400;
+  min-height: 100vh;
+  line-height: 24px;
 
-	background-color: #fff;
-	color: rgba(0, 0, 0, .8);
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.8);
 
-	/*--primary-background: #ff226a;*/
-	/*--primary-color: rgb(255 255 255 / 80%);*/
+  /*--primary-background: #ff226a;*/
+  /*--primary-color: rgb(255 255 255 / 80%);*/
 
-	--panel-z-index: 999999;
-	--main-border: 1px solid rgba(0, 0, 0, .2);
-	--box-shadow: 0px 0px 20px rgba(0, 0, 0, .075);
+  --panel-z-index: 999999;
+  --main-border: 1px solid rgba(0, 0, 0, 0.2);
+  --box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.075);
 }
 
 .app_class--flex {
-	flex: auto;
+  flex: auto;
 }
 
-
 .app_class--button {
-	background-color: #ccc7c2;
-	font-family: inherit;
-	color: #000;
-	font-weight: 500;
-	padding: 5px 15px;
-	font-size: .75rem;
-	border-radius: 5px;
-	transition: border-color 0.25s;
-	border: 1.5px solid rgba(0, 0, 0, .3);
-	box-shadow: 0px 5px 10px rgb(0 0 0 / 10%);
+  background-color: #ccc7c2;
+  font-family: inherit;
+  color: #000;
+  font-weight: 500;
+  padding: 5px 15px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  transition: border-color 0.25s;
+  border: 1.5px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 10px rgb(0 0 0 / 10%);
 }
 
 .app_class--button.fas {
-	font-weight: 900;
-	font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-family: 'Font Awesome 6 Free';
 }
 
 .app_class--button.btn-icon {
-	place-content: center;
-	display: grid;
-	--size: 35px;
-	padding: 0px;
-	width: var(--size);
-	height: var(--size);
-	min-width: var(--size);
-	min-height: var(--size);
+  place-content: center;
+  display: grid;
+  --size: 35px;
+  padding: 0px;
+  width: var(--size);
+  height: var(--size);
+  min-width: var(--size);
+  min-height: var(--size);
 }
 
 .app_class--button.btn-icon.circle {
-	border-radius: 50%;
+  border-radius: 50%;
 }
 
 .app_class--button:hover {
-	border-color: rgb(90, 112, 230);
+  border-color: rgb(90, 112, 230);
 }
 
-.app_class--button:focus, .app_class--button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
+.app_class--button:focus,
+.app_class--button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .app_class--input {
-	background: #eee;
-	border: none;
-	padding: 5px 10px;
-	border-radius: 5px;
+  background: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
-.app_class--input[type="number"] {
-	text-align: right;
+.app_class--input[type='number'] {
+  text-align: right;
 }
-
 
 .app_class--hr {
-	background: #eee;
-	height: 1px;
-	opacity: .5;
-	margin: 10px 5px 5px;
+  background: #eee;
+  height: 1px;
+  opacity: 0.5;
+  margin: 10px 5px 5px;
 }
 
-
-
 ::-webkit-scrollbar {
-	width: 10px;
-	height: 10px;
-	background-color: #e1eaed;
+  width: 10px;
+  height: 10px;
+  background-color: #e1eaed;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #adadad;
-	border-radius: 5px;
+  background: #adadad;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
-	border-radius: 5px;
-	box-shadow: inset 0 0 1px grey;
+  border-radius: 5px;
+  box-shadow: inset 0 0 1px grey;
 }
 
-
-
 [drop_element] {
-	background-color: #f5f5f5;
-	flex: auto;
-	opacity: 1;
-	transition: opacity .1s;
+  background-color: #f5f5f5;
+  flex: auto;
+  opacity: 1;
+  transition: opacity 0.1s;
 }
 
 [drop_element]:hover {
-	opacity: .75;
+  opacity: 0.75;
 }
 
 [drop_element] .lines {
+  place-content: center;
+  display: grid;
 
-	place-content: center;
-	display: grid;
+  background-color: #323a45;
+  color: #fff;
 
-	background-color: #323a45;
-	color: #fff;
+  border-radius: 5px;
+  border: 1px solid #f5f5f5;
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 15%);
 
-	border-radius: 5px;
-	border: 1px solid #f5f5f5;
-	box-shadow: inset 0 -1px 0 rgb(0 0 0 / 15%);
+  background-size: 20px 20px;
+  animation: drop_element__lines 2s linear infinite;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
 
-	background-size: 20px 20px;
-	animation: drop_element__lines 2s linear infinite;
-	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  width: 100%;
+  height: 100%;
 
-	width: 100%;
-	height: 100%;
-
-
-	font-size: 12px;
-	font-weight: 600;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 @keyframes drop_element__lines {
-	from {
-		background-position: 20px 0;
-	}
-	to {
-		background-position: 0 0;
-	}
+  from {
+    background-position: 20px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
 }
 
 .drag_mask {
-	place-content: center;
-	position: absolute;
-	display: grid;
-	color: #000;
-	top: -2px;
-	left: -2px;
-	z-index: 999999;
-	font-size: 12px;
-	font-weight: 600;
-	width: calc(100% + 4px);
-	height: calc(100% + 4px);
-    background-color: rgba(168, 169, 178, .5);
-    background-size: 20px 20px;
-    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  place-content: center;
+  position: absolute;
+  display: grid;
+  color: #000;
+  top: -2px;
+  left: -2px;
+  z-index: 999999;
+  font-size: 12px;
+  font-weight: 600;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background-color: rgba(168, 169, 178, 0.5);
+  background-size: 20px 20px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
 }

@@ -1,183 +1,137 @@
-
-
-
 import { getUID } from '@/helpers/main'
 import { setElement } from '@/file_state/sections'
 import { getElementChildrenStore, getElementDataStore } from '@/global_state/sections'
 import { addElementState, elementHoverState, elementHoverPositionState, dropState } from '@/global_state/move_element'
 import type { I_Element } from '@/types/main'
 
-
-
-
-
 const setDropElementChildrenPosition = ({ args, dragElement }) => {
+  const newChildrenOrder = []
+  const children = getElementChildrenStore(args.dropElementId)
+    .get()
+    .filter(obj => obj.id !== args.dragElementId)
 
-	const newChildrenOrder = []
-	const children = (
-		getElementChildrenStore(args.dropElementId)
-		.get()
-		.filter(obj => obj.id !== args.dragElementId)
-	)
+  let added = false
 
-	let added = false
+  dragElement.position = args.order
 
-	dragElement.position = args.order
+  children.forEach(element => {
+    if (element.position === args.order) {
+      newChildrenOrder.push(dragElement)
+      newChildrenOrder.push(element)
+      added = true
+    } else {
+      newChildrenOrder.push(element)
+    }
+  })
 
-	children.forEach((element) => {
+  if (!added) {
+    newChildrenOrder.push(dragElement)
+  }
 
-		if (element.position === args.order) {
-			newChildrenOrder.push(dragElement)
-			newChildrenOrder.push(element)
-			added = true
-		}
-		else {
-			newChildrenOrder.push(element)
-		}
-	})
-
-	if (!added) {
-		newChildrenOrder.push(dragElement)
-	}
-
-	newChildrenOrder.forEach((element, index) => {
-
-		if (!args.dragElementId && element.id === dragElement.id) {
-
-			setElement(
-				element.id,
-				{
-					...element,
-					position: index + 1,
-					parent: args.dropElementId,
-				}
-			)
-
-			return
-		}
-
-		setElement(
-			element.id,
-			{
+  newChildrenOrder.forEach((element, index) => {
+    if (!args.dragElementId && element.id === dragElement.id) {
+      setElement(element.id, {
         ...element,
-				position: index + 1,
-				parent: args.dropElementId,
-			}
-		)
-	})
-}
+        position: index + 1,
+        parent: args.dropElementId,
+      })
 
+      return
+    }
+
+    setElement(element.id, {
+      ...element,
+      position: index + 1,
+      parent: args.dropElementId,
+    })
+  })
+}
 
 const setDragElementChildrenPosition = ({ oldParent, args }) => {
+  const children = getElementChildrenStore(oldParent)
+    .get()
+    .filter(obj => obj.id !== args.dragElementId)
 
-	const children = (
-		getElementChildrenStore(oldParent)
-		.get()
-		.filter(obj => obj.id !== args.dragElementId)
-	)
-
-	children.forEach((element, index) => {
-
-		setElement(
-			element.id,
-			{
-        ...element,
-				position: index + 1,
-			}
-		)
-	})
+  children.forEach((element, index) => {
+    setElement(element.id, {
+      ...element,
+      position: index + 1,
+    })
+  })
 }
 
-
-
 export const onDrop = (e: DragEvent) => {
+  e.stopPropagation()
+  e.preventDefault()
 
-	e.stopPropagation()
-	e.preventDefault()
-
-	const args = dropState.get()
+  const args = dropState.get()
 
   if (args?.dropElementId == null) {
     return
   }
 
   const dragElement = getDragElement(args.dragElementId)
-	const oldParent = dragElement.parent
+  const oldParent = dragElement.parent
 
   setDragElementChildrenPosition({ args, oldParent })
-	setDropElementChildrenPosition({ args, dragElement })
+  setDropElementChildrenPosition({ args, dragElement })
 
-	// ------------------------------------------------------------------------------------------------
-	// Clear stores data
-	{
+  // ------------------------------------------------------------------------------------------------
+  // Clear stores data
+  {
+    elementHoverState.set(null)
+    addElementState.set(null)
+    dropState.set(null)
+  }
+  // ------------------------------------------------------------------------------------------------
 
-		elementHoverState.set(null)
-		addElementState.set(null)
-		dropState.set(null)
-	}
-	// ------------------------------------------------------------------------------------------------
-
-
-	// ------------------------------------------------------------------------------------------------
-	// Unlock hover event on old parent, that was locked by current hover drag element
-	{
-		const element: HTMLElement = document.getElementById(`events_element_${oldParent}`)
+  // ------------------------------------------------------------------------------------------------
+  // Unlock hover event on old parent, that was locked by current hover drag element
+  {
+    const element: HTMLElement = document.getElementById(`events_element_${oldParent}`)
     const parentElement: HTMLElement = element?.parentElement
     const eventsElement: HTMLElement & { __setLockMouseOver?: (lockMouseOver: boolean) => void } = {
       __setLockMouseOver: null,
       ...parentElement,
     }
 
-		if (eventsElement?.__setLockMouseOver) {
-			eventsElement.__setLockMouseOver(false)
-		}
-	}
-	// ------------------------------------------------------------------------------------------------
+    if (eventsElement?.__setLockMouseOver) {
+      eventsElement.__setLockMouseOver(false)
+    }
+  }
+  // ------------------------------------------------------------------------------------------------
 }
-
 
 export const onDragLeave = (e: DragEvent) => {
+  e.stopPropagation()
+  e.preventDefault()
 
-	e.stopPropagation()
-	e.preventDefault()
-
-	elementHoverState.set(null)
+  elementHoverState.set(null)
 }
-
 
 export const onDragOver = (e: DragEvent, elementId: I_Element['id']) => {
+  e.preventDefault()
+  e.stopPropagation()
 
-	e.preventDefault()
-	e.stopPropagation()
-
-	elementHoverState.set(elementId)
-	elementHoverPositionState.set({ x: e.x, y: e.y })
+  elementHoverState.set(elementId)
+  elementHoverPositionState.set({ x: e.x, y: e.y })
 }
 
-
-
 const getDragElement = (dragElementId?: string) => {
+  if (dragElementId) {
+    return getElementDataStore(dragElementId).get()
+  }
 
-	if (dragElementId) {
-		return getElementDataStore(dragElementId).get()
-	}
-
-	const { component } = addElementState.get()
+  const { component } = addElementState.get()
   const randomNum = (Math.random() * 5).toFixed(0)
   const randomLength = parseInt(randomNum) + 10
   const randomUID = getUID(randomLength)
 
-	const element = {
-		...component,
-		parent: null,
-		id: `${component.type}_${randomUID}`
-	}
+  const element = {
+    ...component,
+    parent: null,
+    id: `${component.type}_${randomUID}`,
+  }
 
-	return element
+  return element
 }
-
-
-
-
-
-

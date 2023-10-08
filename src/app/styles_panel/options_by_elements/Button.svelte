@@ -1,80 +1,41 @@
+<script lang="ts">
+  import DefaultButtonStyles from '../style_options/DefaultButtonStyles.svelte'
 
-<script lang="ts" >
+  import Shadow from '../style_options/box_shadow/Main.svelte'
+  import Border from '../style_options/border/Main.svelte'
+  import Corner from '../style_options/corner/Main.svelte'
+  import Margin from '../style_options/Margin.svelte'
+  import Padding from '../style_options/Padding.svelte'
+  import Position from '../style_options/Position.svelte'
+  import Overflow from '../style_options/Overflow.svelte'
 
-	import DefaultButtonStyles from '../style_options/DefaultButtonStyles.svelte'
+  import CustomButtons from '../CustomButtons.svelte'
 
-	import Shadow from '../style_options/box_shadow/Main.svelte'
-	import Border from '../style_options/border/Main.svelte'
-	import Corner from '../style_options/corner/Main.svelte'
-	import Margin from '../style_options/Margin.svelte'
-	import Padding from '../style_options/Padding.svelte'
-	import Position from '../style_options/Position.svelte'
-	import Overflow from '../style_options/Overflow.svelte'
+  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
 
-	import CustomButtons from '../CustomButtons.svelte'
-
-  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions';
-
-	export let changeStyleKey: T_ChangeStyleKey
+  export let changeStyleKey: T_ChangeStyleKey
   export let deleteStyleKeys: T_DeleteStyleKeys
 
-	export let element = null
-
+  export let element = null
 </script>
 
+<DefaultButtonStyles {element} {changeStyleKey} />
 
-<DefaultButtonStyles
-	{element}
-	{changeStyleKey}
-/>
+<Position {element} {changeStyleKey} />
 
+<Border {element} {changeStyleKey} {deleteStyleKeys} />
 
-<Position
-	{element}
-	{changeStyleKey}
-/>
+<Shadow {element} {changeStyleKey} {deleteStyleKeys} />
 
-<Border
-	{element}
-	{changeStyleKey}
-	{deleteStyleKeys}
-/>
+<Corner {element} {changeStyleKey} {deleteStyleKeys} />
 
-<Shadow
-	{element}
-	{changeStyleKey}
-	{deleteStyleKeys}
-/>
+<Padding {element} {changeStyleKey} />
 
-<Corner
-	{element}
-	{changeStyleKey}
-	{deleteStyleKeys}
-/>
+<Margin {element} {changeStyleKey} />
 
-<Padding
-	{element}
-	{changeStyleKey}
-/>
+<Overflow {element} {changeStyleKey} />
 
-<Margin
-	{element}
-	{changeStyleKey}
-/>
-
-<Overflow
-	{element}
-	{changeStyleKey}
-/>
-
-<CustomButtons
-	{element}
-/>
-
-
+<CustomButtons {element} />
 
 <style>
-
 </style>
-
-

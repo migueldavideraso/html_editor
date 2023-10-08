@@ -1,117 +1,103 @@
-
 import type { I_Element } from '@/types/main'
 import { writable, get } from 'svelte/store'
 import { selectedSectionState } from './sections'
 
+export const elementHoverState = (function () {
+  const { subscribe, set } = writable<I_Element['id']>(null)
 
+  let currentId = null
 
+  subscribe(state => {
+    currentId = state
+  })
 
-export const elementHoverState = function () {
+  return {
+    subscribe,
+    set: (id: I_Element['id']) => {
+      currentId !== id && set(id)
+    },
+  }
+})()
 
-	const { subscribe, set } = writable<I_Element['id']>(null)
+export const elementHoverPositionState = (function () {
+  type T_Positions = { x: number; y: number }
+  const { subscribe, set } = writable<T_Positions>(null)
 
-	let currentId = null
-
-	subscribe((state) => {
-		currentId = state
-	})
-
-	return {
-		subscribe,
-		set: (id: I_Element['id']) => {
-			currentId !== id  && set(id)
-		},
-	}
-}()
-
-
-export const elementHoverPositionState = function () {
-
-  type T_Positions = { x: number, y: number }
-	const { subscribe, set } = writable<T_Positions>(null)
-
-	return {
-		subscribe,
-		set: (args: T_Positions) => {
-
+  return {
+    subscribe,
+    set: (args: T_Positions) => {
       if (args == null) {
         set(null)
         return
       }
 
       const { x, y } = args
-			set({ x, y })
-		},
-	}
-}()
+      set({ x, y })
+    },
+  }
+})()
 
+export const dropState = (function () {
+  interface I_DropState {
+    dragElementId?: I_Element['id']
+    dropElementId?: I_Element['id']
+    order?: number
+  }
 
-export const dropState = function () {
+  const { subscribe, set } = writable<I_DropState>(null)
 
-  interface I_DropState { dragElementId?: I_Element['id'], dropElementId?: I_Element['id'], order?: number }
-
-	const { subscribe, set } = writable<I_DropState>(null)
-
-	return {
-		subscribe,
-		get: () => get(dropState),
-		set: (args: I_DropState) => {
-
+  return {
+    subscribe,
+    get: () => get(dropState),
+    set: (args: I_DropState) => {
       if (args == null) {
         set(null)
         return
       }
 
       const { dragElementId, dropElementId, order } = args
-			set({ dragElementId, dropElementId, order })
-		},
-	}
-}()
+      set({ dragElementId, dropElementId, order })
+    },
+  }
+})()
 
+export const addElementState = (function () {
+  const { subscribe, set } = writable<{ component: I_Element }>(null)
 
-export const addElementState = function () {
-
-	const { subscribe, set } = writable<{ component: I_Element}>(null)
-
-	return {
-		subscribe,
-		get: () => get(addElementState),
-		set: (args: { component: I_Element }) => {
-
+  return {
+    subscribe,
+    get: () => get(addElementState),
+    set: (args: { component: I_Element }) => {
       if (args == null) {
         set(null)
         return
       }
 
       const { component } = args
-			set({ component })
-		},
-	}
-}()
+      set({ component })
+    },
+  }
+})()
 
-
-
-export const allowShowMaskState = function () {
-
-	const { subscribe, set, update } = writable<boolean>(true)
+export const allowShowMaskState = (function () {
+  const { subscribe, set, update } = writable<boolean>(true)
 
   const allow = () => set(true)
   const dontAllow = () => set(false)
   const toogle = () => update(state => !state)
-  
-	selectedSectionState.subscribe(state => {
 
-		if (state != null && state != '') {
+  selectedSectionState.subscribe(state => {
+    if (state != null && state != '') {
       allow()
-			return
-		}
-	})
+      return
+    }
+  })
 
-	return {
-		subscribe,
+  return {
+    subscribe,
     allow,
     toogle,
     dontAllow,
-		get: () => get(addElementState),
-	}
-}()
+    get: () => get(addElementState),
+  }
+})()

@@ -1,68 +1,68 @@
 <script>
-	import { elementsChildrenState } from "../../global_state/sections";
-	import Element from "./Element.svelte";
-	import { initHoverController } from "./events_controller/hover_page_controller";
+  import { elementsChildrenState } from '../../global_state/sections'
+  import Element from './Element.svelte'
+  import { initHoverController } from './events_controller/hover_page_controller'
 
-	let elementsOfFirstLevel = [];
+  let elementsOfFirstLevel = []
 
-	elementsChildrenState.subscribe((state) => {
-		elementsOfFirstLevel = state["null"] || [];
-	});
+  elementsChildrenState.subscribe(state => {
+    elementsOfFirstLevel = state['null'] || []
+  })
 
-	initHoverController();
+  initHoverController()
 </script>
 
 <section class="page">
-	{#each elementsOfFirstLevel as element (element.id)}
-		<Element elementId={element.id} />
-	{/each}
+  {#each elementsOfFirstLevel as element (element.id)}
+    <Element elementId={element.id} />
+  {/each}
 </section>
 
 <style>
-	.page {
-		width: 100%;
-		height: 100%;
-		box-shadow: var(--box-shadow);
-	}
+  .page {
+    width: 100%;
+    height: 100%;
+    box-shadow: var(--box-shadow);
+  }
 
-	.page :global(.mask) {
-		position: fixed;
-		border-radius: 5px;
-	}
+  .page :global(.mask) {
+    position: fixed;
+    border-radius: 5px;
+  }
 
-	.page :global(.mask) {
-		opacity: 1;
-		background-size: 20px 20px;
-		animation: hover_element__lines 2s linear infinite;
-		background-color: rgba(0, 0, 0, 0.1);
-		background-image: linear-gradient(
-			45deg,
-			rgba(255, 255, 255, 0.15) 25%,
-			transparent 25%,
-			transparent 50%,
-			rgba(255, 255, 255, 0.15) 50%,
-			rgba(255, 255, 255, 0.15) 75%,
-			transparent 75%,
-			transparent
-		);
+  .page :global(.mask) {
+    opacity: 1;
+    background-size: 20px 20px;
+    animation: hover_element__lines 2s linear infinite;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent
+    );
 
-		border: 1.5px solid rgba(255, 255, 255, 0.75);
-	}
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+  }
 
-	.page :global(.mask.brightness) {
-		border: 1.5px solid rgba(0, 0, 0, 0.75);
-	}
+  .page :global(.mask.brightness) {
+    border: 1.5px solid rgba(0, 0, 0, 0.75);
+  }
 
-	.page :global(.mask.hover) {
-		border: none;
-	}
+  .page :global(.mask.hover) {
+    border: none;
+  }
 
-	@keyframes hover_element__lines {
-		from {
-			background-position: 20px 0;
-		}
-		to {
-			background-position: 0 0;
-		}
-	}
+  @keyframes hover_element__lines {
+    from {
+      background-position: 20px 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
 </style>
