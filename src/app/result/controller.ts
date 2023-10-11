@@ -9,6 +9,7 @@ import Box from './elements/Box.svelte'
 import Button from './elements/Button.svelte'
 import Grid from './elements/Grid.svelte'
 import Section from './elements/Section.svelte'
+import Image from './elements/Image.svelte'
 import Text from './elements/Text.svelte'
 
 
@@ -18,6 +19,7 @@ const components = {
 	'button': Button,
 	'grid': Grid,
 	'text': Text,
+  'image': Image,
 	'box': Box,
 	'app': App,
 }
