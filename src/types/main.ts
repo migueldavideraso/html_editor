@@ -1,8 +1,8 @@
 export const elementsTypes = ['app', 'section', 'grid', 'box', 'text', 'button'] as const
-export type T_Element_Type = (typeof elementsTypes)[number]
+import type { elementsType, units } from '@/constants/main';
 
-export const units = ['px', 'rem', '%'] as const
-export type T_Unit = (typeof units)[number]
+export type T_Element_Type = typeof elementsType[number];
+export type T_Unit = typeof units[number];
 
 export interface I_Element {
   id?: string
@@ -10,8 +10,8 @@ export interface I_Element {
   position?: number
   parent: string | null
   text?: string
-  type: 'app' | 'section' | 'grid' | 'box' | 'text'
-
+  type: T_Element_Type
+  src?: string
   styles: {
     [key: string]: string
   }
