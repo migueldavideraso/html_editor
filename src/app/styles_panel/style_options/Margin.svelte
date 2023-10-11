@@ -1,88 +1,60 @@
-
 <script lang="ts">
-  
-  import type { I_Element } from '@/types/main';
+  import type { I_Element } from '@/types/main'
 
-	import StylesButton from '../StylesButton.svelte'
-	import SizeInputs from '../components/SizeInputs.svelte'
+  import StylesButton from '../StylesButton.svelte'
+  import SizeInputs from '../components/SizeInputs.svelte'
 
-	export let changeStyleKey:(key: string, value: string) => void = () => {}
-	export let element: I_Element
-
+  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  export let element: I_Element
 </script>
 
+<StylesButton title="Margin">
+  <section class="elements_grid">
+    <div class="input_group">
+      <div class="title"> margin top: </div>
 
-<StylesButton title="Margin" >
+      <SizeInputs
+        units={['px', '%', 'rem']}
+        optionsTypes={['numeric', 'unset', 'auto']}
+        optionValue={element.styles['margin-top'] || ''}
+        onChange={value => changeStyleKey('margin-top', value)}
+      />
+    </div>
 
-	<section class="elements_grid">
+    <div class="input_group">
+      <div class="title"> margin bottom: </div>
 
-		<div class="input_group">
+      <SizeInputs
+        units={['px', '%', 'rem']}
+        optionsTypes={['numeric', 'unset', 'auto']}
+        optionValue={element.styles['margin-bottom'] || ''}
+        onChange={value => changeStyleKey('margin-bottom', value)}
+      />
+    </div>
 
-			<div class="title"> margin top: </div>
+    <div class="input_group">
+      <div class="title"> margin left: </div>
 
-			<SizeInputs
-				units={[ 'px', '%', 'rem' ]}
-				optionsTypes={[ 'numeric', 'unset', 'auto' ]}
-				optionValue={element.styles['margin-top'] || ''}
-				onChange={(value) => changeStyleKey('margin-top', value)}
-			/>
+      <SizeInputs
+        units={['px', '%', 'rem']}
+        optionsTypes={['numeric', 'unset', 'auto']}
+        optionValue={element.styles['margin-left'] || ''}
+        onChange={value => changeStyleKey('margin-left', value)}
+      />
+    </div>
 
-		</div>
+    <div class="input_group">
+      <div class="title"> margin right: </div>
 
-
-
-		<div class="input_group">
-
-			<div class="title"> margin bottom: </div>
-
-			<SizeInputs
-				units={[ 'px', '%', 'rem' ]}
-				optionsTypes={[ 'numeric', 'unset', 'auto' ]}
-				optionValue={element.styles['margin-bottom'] || ''}
-				onChange={(value) => changeStyleKey('margin-bottom', value)}
-			/>
-
-		</div>
-
-
-
-		<div class="input_group">
-
-			<div class="title"> margin left: </div>
-
-			<SizeInputs
-				units={[ 'px', '%', 'rem' ]}
-				optionsTypes={[ 'numeric', 'unset', 'auto' ]}
-				optionValue={element.styles['margin-left'] || ''}
-				onChange={(value) => changeStyleKey('margin-left', value)}
-			/>
-
-		</div>
-
-
-
-		<div class="input_group">
-
-			<div class="title"> margin right: </div>
-
-			<SizeInputs
-				units={[ 'px', '%', 'rem' ]}
-				optionsTypes={[ 'numeric', 'unset', 'auto' ]}
-				optionValue={element.styles['margin-right'] || ''}
-				onChange={(value) => changeStyleKey('margin-right', value)}
-			/>
-
-		</div>
-
-
-	</section>
-
-
+      <SizeInputs
+        units={['px', '%', 'rem']}
+        optionsTypes={['numeric', 'unset', 'auto']}
+        optionValue={element.styles['margin-right'] || ''}
+        onChange={value => changeStyleKey('margin-right', value)}
+      />
+    </div>
+  </section>
 </StylesButton>
 
-
 <style>
-
 </style>
-
-
