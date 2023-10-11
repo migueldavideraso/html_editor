@@ -1,8 +1,17 @@
+import type { I_Element, T_Element_Type } from "@/types/main"
 
+export const elementsType = [ 'app', 'section', 'grid', 'box', 'text', 'button', 'image' ] as const
 
+export const units = [ 'px', 'rem', '%' ] as const
 
+export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 
-export const componentsData = {
+	'app': {
+		name: 'App',
+		type: 'app',
+		parent: null,
+		styles: { },
+	},
 
 	'section': {
 		name: 'Section',
@@ -37,6 +46,14 @@ export const componentsData = {
 		text: 'Button Text',
 		name: 'Button',
 		type: 'button',
+		parent: null,
+		styles: { },
+	},
+
+	'image': {
+		name: 'image',
+		type: 'image',
+    src: null,
 		parent: null,
 		styles: { },
 	},
