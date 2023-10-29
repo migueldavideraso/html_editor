@@ -15,7 +15,7 @@ export interface I_Element {
     [key: string]: string
   },
   attributes: {
-    [key: string]: string|number
+    [key: string]: string
   }
 }
 
