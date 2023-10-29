@@ -9,10 +9,16 @@
 
 
 <div class="{element.id}" id="{element.id}" >
-	<slot />
+  <slot />
+	<img src={element.attributes?.src} alt={element.attributes?.alt}>
 </div>
 
 
 
-
+<style>
+  img {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+  }
+</style>
 

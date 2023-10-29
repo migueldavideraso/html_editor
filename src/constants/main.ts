@@ -60,7 +60,13 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		name: 'image',
 		type: 'image',
 		parent: null,
-		styles: { },
-		attributes: { },
+		styles: {
+      width: '300px',
+      height: '300px',
+    },
+		attributes: {
+      alt: 'Project made with: HTML Editor',
+      src: '/default-img.png',
+    },
 	},
 } as const

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Section from '../options_by_elements/Section.svelte'
-  // import Button from '../options_by_elements/Button.svelte'
+  import Image from '../options_by_elements/Image.svelte'
   import Text from '../options_by_elements/Text.svelte'
   import Grid from '../options_by_elements/Grid.svelte'
   import Box from '../options_by_elements/Box.svelte'
@@ -25,4 +25,6 @@
   <Text {element} {changeStyleKey} {deleteStyleKeys} {changeElementKey} />
 {:else if element.type === 'section'}
   <Section {element} {changeStyleKey} {deleteStyleKeys} />
+{:else if element.type === 'image'}
+  <Image {element} {changeStyleKey} {deleteStyleKeys} />
 {/if}
