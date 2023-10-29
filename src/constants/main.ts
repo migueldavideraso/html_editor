@@ -11,6 +11,7 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'app',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'section': {
@@ -18,6 +19,7 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'section',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'box': {
@@ -25,6 +27,7 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'box',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'text': {
@@ -33,6 +36,7 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'text',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'grid': {
@@ -40,6 +44,7 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'grid',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'button': {
@@ -48,13 +53,14 @@ export const defaultComponentsData: {[id in T_Element_Type ]: I_Element} = {
 		type: 'button',
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 
 	'image': {
 		name: 'image',
 		type: 'image',
-    src: null,
 		parent: null,
 		styles: { },
+		attributes: { },
 	},
 } as const

@@ -11,9 +11,11 @@ export interface I_Element {
   parent: string | null
   text?: string
   type: T_Element_Type
-  src?: string
   styles: {
     [key: string]: string
+  },
+  attributes: {
+    [key: string]: string|number
   }
 }
 
