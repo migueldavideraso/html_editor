@@ -1,13 +1,14 @@
 <script lang="ts">
+  import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
+  import FlexOptions from '../style_options/Flex.svelte'
+  import Input from '../style_options/Input.svelte'
+  import Margin from '../style_options/Margin.svelte'
+  import Overflow from '../style_options/Overflow.svelte'
+  import Padding from '../style_options/Padding.svelte'
+  import Position from '../style_options/Position.svelte'
   import Border from '../style_options/border/Main.svelte'
   import Shadow from '../style_options/box_shadow/Main.svelte'
   import Corner from '../style_options/corner/Main.svelte'
-  import Margin from '../style_options/Margin.svelte'
-  import Padding from '../style_options/Padding.svelte'
-  import Position from '../style_options/Position.svelte'
-  import Overflow from '../style_options/Overflow.svelte'
-  import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
-  import FlexOptions from '../style_options/Flex.svelte'
 
   import CustomButtons from '../CustomButtons.svelte'
 
@@ -36,5 +37,7 @@
 <Overflow {element} {changeStyleKey} />
 
 <FlexOptions {element} {changeStyleKey} />
+
+<Input />
 
 <CustomButtons {element} />
