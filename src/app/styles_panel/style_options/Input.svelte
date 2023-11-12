@@ -1,6 +1,19 @@
+<script lang="ts">
+  export let value: string
+  export let onChange: (value: string) => void
+</script>
+
 <article class="custom-input-container">
   <label for="custom-input">Url</label>
-  <input class="custom-input" type="url" placeholder="https://example.com" id="custom-input" />
+
+  <input
+    class="custom-input"
+    type="url"
+    placeholder="https://example.com"
+    id="custom-input"
+    on:input={evt => onChange(evt.currentTarget.value)}
+    bind:value
+  />
 </article>
 
 <style>

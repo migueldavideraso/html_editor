@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Section from '../options_by_elements/Section.svelte'
-  import Image from '../options_by_elements/Image.svelte'
-  import Text from '../options_by_elements/Text.svelte'
-  import Grid from '../options_by_elements/Grid.svelte'
-  import Box from '../options_by_elements/Box.svelte'
-  import App from '../options_by_elements/App.svelte'
   import type { I_Element } from '@/types/main'
   import type { T_ChangeElementKey, T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
+  import App from '../options_by_elements/App.svelte'
+  import Box from '../options_by_elements/Box.svelte'
+  import Grid from '../options_by_elements/Grid.svelte'
+  import Image from '../options_by_elements/Image.svelte'
+  import Section from '../options_by_elements/Section.svelte'
+  import Text from '../options_by_elements/Text.svelte'
 
   export let changeStyleKey: T_ChangeStyleKey
   export let deleteStyleKeys: T_DeleteStyleKeys
@@ -26,5 +26,5 @@
 {:else if element.type === 'section'}
   <Section {element} {changeStyleKey} {deleteStyleKeys} />
 {:else if element.type === 'image'}
-  <Image {element} {changeStyleKey} {deleteStyleKeys} />
+  <Image {element} {changeStyleKey} {deleteStyleKeys} {changeElementKey} />
 {/if}

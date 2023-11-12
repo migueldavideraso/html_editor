@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { T_ChangeElementKey, T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
+  import CustomButtons from '../CustomButtons.svelte'
   import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
   import FlexOptions from '../style_options/Flex.svelte'
   import Input from '../style_options/Input.svelte'
@@ -10,14 +12,14 @@
   import Shadow from '../style_options/box_shadow/Main.svelte'
   import Corner from '../style_options/corner/Main.svelte'
 
-  import CustomButtons from '../CustomButtons.svelte'
-
-  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
-
   export let changeStyleKey: T_ChangeStyleKey
   export let deleteStyleKeys: T_DeleteStyleKeys
-
   export let element = null
+  export let changeElementKey: T_ChangeElementKey
+
+  const onChangeInput = (value: string) => {
+    changeElementKey('attributes', { ...element.attributes, src: value })
+  }
 </script>
 
 <DefaultBoxStyles {element} {changeStyleKey} showFill={false} />
@@ -38,6 +40,6 @@
 
 <FlexOptions {element} {changeStyleKey} />
 
-<Input />
+<Input value={element.attributes.src} onChange={onChangeInput} />
 
 <CustomButtons {element} />
