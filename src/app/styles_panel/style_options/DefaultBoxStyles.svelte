@@ -6,17 +6,26 @@
 
   export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
+  export let showFill = true
+
 </script>
 
-<section class="app--main_options_section">
+<section class="app--main_options_section {showFill ? 'show-fill' : ''}">
   <section class="row">
-    <span class="title"> Fill </span>
+
+    {#if showFill}
+      <span class="title"> Fill </span>
+    {/if}
+
     <span class="title"> Width </span>
     <span class="title"> Height </span>
   </section>
 
   <section class="row">
-    <ColorPicker color={element.styles['background-color']} onChange={value => changeStyleKey('background-color', value)} />
+
+    {#if showFill}
+      <ColorPicker color={element.styles['background-color']} onChange={value => changeStyleKey('background-color', value)} />
+    {/if}
 
     <SizeInputs units={['px', '%', 'rem']} optionValue={element.styles.width || ''} onChange={value => changeStyleKey('width', value)} />
 
@@ -38,6 +47,10 @@
   .row {
     display: grid;
     grid-gap: 5px;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+
+  .app--main_options_section.show-fill .row {
     grid-template-columns: 35px repeat(2, minmax(100px, 1fr));
   }
 
