@@ -22,6 +22,8 @@ const removeDropElements = () => {
 const setElementsChildrensPositons = () => {
   childrensPositions = []
 
+  console.log(childrensPositions)
+
   if (!currentDOMElement) {
     return
   }
@@ -29,6 +31,7 @@ const setElementsChildrensPositons = () => {
   const children = Array.from(currentDOMElement.children).filter(el => el.querySelector('.events_element'))
 
   children.forEach((el: T_HTMLElement) => {
+    console.log(el)
     const { x, y, width, height } = el.getBoundingClientRect()
     childrensPositions.push({ x, width, y, height, element: el })
   })

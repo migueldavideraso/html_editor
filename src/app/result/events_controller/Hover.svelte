@@ -50,15 +50,16 @@
     }
 
     const initialSize = 10
-    const { width, height, x, y } = componentElement.getBoundingClientRect()
+    // const { width, height, x, y } = componentElement.getBoundingClientRect()
+    const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = componentElement
 
     const size = initialSize
     const position = initialSize / 2
 
-    maskElement.style.height = `${height + size}px`
-    maskElement.style.width = `${width + size}px`
-    maskElement.style.left = `${x - position}px`
-    maskElement.style.top = `${y - position}px`
+    maskElement.style.height = `${offsetHeight + size}px`
+    maskElement.style.width = `${offsetWidth + size}px`
+    maskElement.style.left = `${offsetLeft - position}px`
+    maskElement.style.top = `${offsetTop - position}px`
   }
 
   // ------------------------------------------------------
@@ -77,7 +78,8 @@
       return
     }
 
-    maskElement = document.createElement('span')
+    maskElement = document.createElement('div')
+    maskElement.innerHTML = '<span></span>'
     maskElement.className = 'mask'
     maskElement.id = maskId
 
