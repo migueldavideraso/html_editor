@@ -1,8 +1,5 @@
-import './app.css'
-import App from './App.svelte'
 
-const app = new App({
-  target: document.body,
-})
+import { createHTMLEditor } from "./app";
 
-export default app
+
+createHTMLEditor(document.getElementById('app'))
