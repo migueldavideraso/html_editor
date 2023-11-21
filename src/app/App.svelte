@@ -22,14 +22,17 @@
 
 <style>
   .main_container {
-    height: 100vh;
+    overflow: hidden;
     display: grid;
+    height: 100%;
+    border-radius: 5px;
     grid-template-columns: 1fr auto;
+    border: 1px solid rgb(172, 173, 188);
   }
 
   .main_container > main,
   .main_container > aside {
-    height: 100vh;
+    height: 100%;
   }
 
   .main_container > aside {
@@ -48,13 +51,14 @@
 
   .container_app {
     justify-content: center;
+    background: #e6e7ee;
     align-items: center;
-    background: #fbfafa;
     position: relative;
     overflow: hidden;
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding: 10px;
     color: rgba(0, 0, 0, 0.8);
   }
 
