@@ -20,4 +20,14 @@ export default defineConfig({
   preview: {
     port: 8080,
   },
+
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'min.js',
+        chunkFileNames: 'min.[hash].js',
+        assetFileNames: 'min.[ext]',
+      },
+    },
+  },
 })
