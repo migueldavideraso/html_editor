@@ -1,42 +1,35 @@
 <script>
-
-
-  import { defaultComponentsData } from '@/constants/main';
-	import Cell from './Cell.svelte'
-
+  import { defaultComponentsData } from '@/constants/main'
+  import Cell from './Cell.svelte'
 </script>
 
 <section class="content">
+  <Cell title="Text" component={defaultComponentsData.text}>Custom Text</Cell>
 
-	<Cell title="Text" component={defaultComponentsData.text}>
-		Custom Text
-	</Cell>
+  <Cell title="Box" component={defaultComponentsData.box}>
+    <div class="component__box" />
+  </Cell>
 
-	<Cell title="Box" component={defaultComponentsData.box}>
-		<div class="component__box" />
-	</Cell>
+  <Cell title="Section" component={defaultComponentsData.section}>
+    <div class="component__box component__section">
+      <div class="component__child" />
+      <div class="component__child" style="flex: auto;" />
+    </div>
+  </Cell>
 
-	<Cell title="Section" component={defaultComponentsData.section}>
-		<div class="component__box component__section">
-			<div class="component__child" />
-			<div class="component__child" style="flex: auto;" />
-		</div>
-	</Cell>
+  <Cell title="Grid" component={defaultComponentsData.grid}>
+    <div class="component__box component__grid">
+      <div class="component__child" />
+      <div class="component__child" />
+      <div class="component__child" />
+      <div class="component__child" />
+      <div class="component__child" />
+    </div>
+  </Cell>
 
-	<Cell title="Grid" component={defaultComponentsData.grid}>
-		<div class="component__box component__grid">
-			<div class="component__child" />
-			<div class="component__child" />
-			<div class="component__child" />
-			<div class="component__child" />
-			<div class="component__child" />
-		</div>
-	</Cell>
-
-	<Cell title="Image" component={defaultComponentsData.image}>
-		<div class="component__child" />
-	</Cell>
-
+  <Cell title="Image" component={defaultComponentsData.image}>
+    <div class="component__child" />
+  </Cell>
 </section>
 
 <style>

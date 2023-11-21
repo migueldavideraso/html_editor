@@ -1,19 +1,13 @@
-
 <script lang="ts">
-
-  import type { I_Element } from "@/types/main";
+  import type { I_Element } from '@/types/main'
 
   export let element: I_Element
-
 </script>
 
-
-<div class="{element.id}" id="{element.id}" >
+<div class={element.id} id={element.id}>
   <slot />
-	<img src={element.attributes?.src} alt={element.attributes?.alt}>
+  <img src={element.attributes?.src} alt={element.attributes?.alt} />
 </div>
-
-
 
 <style>
   img {
@@ -21,4 +15,3 @@
     height: -webkit-fill-available;
   }
 </style>
-

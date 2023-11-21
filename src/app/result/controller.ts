@@ -10,13 +10,13 @@ import Image from './elements/Image.svelte'
 import Text from './elements/Text.svelte'
 
 const components = {
-	'section': Section,
-	'button': Button,
-	'grid': Grid,
-	'text': Text,
-  'image': Image,
-	'box': Box,
-	'app': App,
+  section: Section,
+  button: Button,
+  grid: Grid,
+  text: Text,
+  image: Image,
+  box: Box,
+  app: App,
 }
 
 export const getItemComponent = ({ element }) => {

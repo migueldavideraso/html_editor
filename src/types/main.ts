@@ -1,8 +1,8 @@
 export const elementsTypes = ['app', 'section', 'grid', 'box', 'text', 'button'] as const
-import type { elementsType, units } from '@/constants/main';
+import type { elementsType, units } from '@/constants/main'
 
-export type T_Element_Type = typeof elementsType[number];
-export type T_Unit = typeof units[number];
+export type T_Element_Type = (typeof elementsType)[number]
+export type T_Unit = (typeof units)[number]
 
 export interface I_Element {
   id?: string
@@ -13,7 +13,7 @@ export interface I_Element {
   type: T_Element_Type
   styles: {
     [key: string]: string
-  },
+  }
   attributes: {
     [key: string]: string
   }

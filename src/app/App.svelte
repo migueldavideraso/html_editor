@@ -61,5 +61,4 @@
     padding: 10px;
     color: rgba(0, 0, 0, 0.8);
   }
-
 </style>

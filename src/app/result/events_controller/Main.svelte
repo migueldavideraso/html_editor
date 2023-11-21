@@ -34,7 +34,7 @@
 {/if}
 
 <div class="events_element" id="events_element_{elementId}" bind:this={eventsElement}>
-  <span  />
+  <span />
 </div>
 
 <style>
@@ -54,5 +54,4 @@
     width: 100%;
     height: 100%;
   }
-
 </style>

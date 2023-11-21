@@ -7,12 +7,10 @@
   export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
   export let showFill = true
-
 </script>
 
 <section class="app--main_options_section {showFill ? 'show-fill' : ''}">
   <section class="row">
-
     {#if showFill}
       <span class="title"> Fill </span>
     {/if}
@@ -22,7 +20,6 @@
   </section>
 
   <section class="row">
-
     {#if showFill}
       <ColorPicker color={element.styles['background-color']} onChange={value => changeStyleKey('background-color', value)} />
     {/if}
