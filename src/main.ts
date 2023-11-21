@@ -1,4 +1,5 @@
 
+import './main.css'
 import { createHTMLEditor } from "./app";
 
 

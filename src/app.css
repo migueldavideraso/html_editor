@@ -1,35 +1,20 @@
 @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 
-* {
+.html-editor-container, .html-editor-container * {
   box-sizing: border-box;
 }
 
-body {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  position: relative;
-  margin: 0px;
-  font-size: 16px;
-  min-width: 320px;
-  font-weight: 400;
-  min-height: 100vh;
-  line-height: 24px;
-
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.8);
-
-  /*--primary-background: #ff226a;*/
-  /*--primary-color: rgb(255 255 255 / 80%);*/
-
+.html-editor-container {
   --panel-z-index: 999999;
   --main-border: 1px solid rgba(0, 0, 0, 0.2);
   --box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.075);
 }
 
-.app_class--flex {
+.html-editor-container .app_class--flex {
   flex: auto;
 }
 
-.app_class--button {
+.html-editor-container .app_class--button {
   background-color: #ccc7c2;
   font-family: inherit;
   color: #000;
@@ -42,12 +27,12 @@ body {
   box-shadow: 0px 5px 10px rgb(0 0 0 / 10%);
 }
 
-.app_class--button.fas {
+.html-editor-container .app_class--button.fas {
   font-weight: 900;
   font-family: 'Font Awesome 6 Free';
 }
 
-.app_class--button.btn-icon {
+.html-editor-container .app_class--button.btn-icon {
   place-content: center;
   display: grid;
   --size: 35px;
@@ -58,65 +43,71 @@ body {
   min-height: var(--size);
 }
 
-.app_class--button.btn-icon.circle {
+.html-editor-container .app_class--button.btn-icon.circle {
   border-radius: 50%;
 }
 
-.app_class--button:hover {
+.html-editor-container .app_class--button:hover {
   border-color: rgb(90, 112, 230);
 }
 
-.app_class--button:focus,
-.app_class--button:focus-visible {
+.html-editor-container .app_class--button:focus,
+.html-editor-container .app_class--button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.app_class--input {
+.html-editor-container .app_class--input {
   background: #eee;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
-.app_class--input[type='number'] {
+.html-editor-container .app_class--input[type='number'] {
   text-align: right;
 }
 
-.app_class--hr {
+.html-editor-container .app_class--hr {
   background: #eee;
   height: 1px;
   opacity: 0.5;
   margin: 10px 5px 5px;
 }
 
-::-webkit-scrollbar {
+.html-editor-container::-webkit-scrollbar,
+.html-editor-container ::-webkit-scrollbar
+{
   width: 10px;
   height: 10px;
   background-color: #e1eaed;
 }
 
-::-webkit-scrollbar-thumb {
+.html-editor-container::-webkit-scrollbar-thumb,
+.html-editor-container ::-webkit-scrollbar-thumb
+{
   background: #adadad;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-track {
+.html-editor-container::-webkit-scrollbar-track,
+.html-editor-container ::-webkit-scrollbar-track
+{
   border-radius: 5px;
   box-shadow: inset 0 0 1px grey;
 }
 
-[drop_element] {
+.html-editor-container [drop_element] {
   background-color: #f5f5f5;
   flex: auto;
   opacity: 1;
   transition: opacity 0.1s;
 }
 
-[drop_element]:hover {
+.html-editor-container [drop_element]:hover {
   opacity: 0.75;
 }
 
-[drop_element] .lines {
+.html-editor-container [drop_element] .lines {
   place-content: center;
   display: grid;
 
@@ -156,7 +147,7 @@ body {
   }
 }
 
-.drag_mask {
+.html-editor-container .drag_mask {
   place-content: center;
   position: absolute;
   display: grid;
@@ -180,4 +171,95 @@ body {
     transparent 75%,
     transparent
   );
+}
+
+.html-editor-container .app--button {
+  justify-content: flex-start;
+  background: transparent;
+  align-items: center;
+  display: flex;
+  grid-gap: 5px;
+  border-radius: 5px;
+  padding: 10px 12.5px;
+  color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.html-editor-container .app--button:hover {
+  opacity: 0.8;
+}
+
+.html-editor-container .app--options_section {
+  position: relative;
+  padding: 10px;
+  min-height: 30px;
+  margin: 0px 20px;
+  border-radius: 0px 0px 5px 5px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: none;
+}
+
+.html-editor-container .app--main_options_section {
+  padding: 10px;
+  margin: 0px 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.html-editor-container .app--main_options_section .main_title,
+.html-editor-container .app--options_section .main_title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0px -5px -10px;
+}
+
+.html-editor-container .app--main_options_section .title,
+.html-editor-container .app--options_section .title {
+  font-size: 0.78rem;
+  margin-bottom: -10px;
+}
+
+.html-editor-container .app--main_options_section .input_group,
+.html-editor-container .app--options_section .input_group {
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+  grid-gap: 5px;
+}
+
+.html-editor-container .app--main_options_section textarea,
+.html-editor-container .app--main_options_section select,
+.html-editor-container .app--main_options_section input,
+.html-editor-container .app--options_section textarea,
+.html-editor-container .app--options_section select,
+.html-editor-container .app--options_section input {
+  border: none;
+  padding: 2px;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 3px rgb(0 0 0 / 20%);
+}
+
+.html-editor-container .app--main_options_section textarea,
+.html-editor-container .app--options_section textarea {
+  font-family: inherit;
+  resize: vertical;
+  width: 100%;
+  height: 25px;
+  padding: 5px;
+  max-width: 100%;
+  min-height: 25px;
+}
+
+.html-editor-container .app--main_options_section input,
+.html-editor-container .app--options_section input {
+  max-width: 55px;
+}
+
+.html-editor-container .app--main_options_section input[type='number'],
+.html-editor-container .app--options_section input[type='number'] {
+  text-align: right;
 }
