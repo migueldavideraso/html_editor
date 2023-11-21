@@ -23,6 +23,7 @@ export default defineConfig({
 
   build: {
     rollupOptions: {
+      input: './src/app.ts',
       output: {
         entryFileNames: 'min.js',
         chunkFileNames: 'min.[hash].js',
