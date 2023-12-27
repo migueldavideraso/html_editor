@@ -22,13 +22,28 @@ export default defineConfig({
   },
 
   build: {
-    rollupOptions: {
-      input: './src/app.ts',
-      output: {
-        entryFileNames: 'min.js',
-        chunkFileNames: 'min.[hash].js',
-        assetFileNames: 'min.[ext]',
-      },
+
+    lib: {
+      entry: path.resolve(__dirname, "./src/app.ts"),
+      fileName: "min",
+      formats: ["cjs", "es"],
     },
+
+    emptyOutDir: false,
+
+    outDir: './package/src/',
+    // target: 'es2021',
+    // rollupOptions: {
+    //   input: {
+    //     min: './src/app.ts',
+    //   },
+    //   output: [
+    //     {
+    //       entryFileNames: 'min.js',
+    //       chunkFileNames: 'min.[hash].js',
+    //       assetFileNames: 'min.[ext]',
+    //     },
+    //   ],
+    // },
   },
 })
