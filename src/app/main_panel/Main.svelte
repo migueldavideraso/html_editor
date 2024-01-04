@@ -3,6 +3,7 @@
   import { setMoveController } from '@/helpers/move_element'
 
   import AddElementDropdown from '@/app/components/add_element/Main.svelte'
+  import Icon from '../components/Icon.svelte'
 
   let moveElement = null
   let wrapperElement = null
@@ -23,16 +24,28 @@
 
 <section class="global_panel {isOptionsShowing ? 'show' : 'hide'}" bind:this={moveElement}>
   {#if isOptionsShowing}
-    <button class="circle fas fa-plus" title="Add Element" on:click={() => addElementModalState.open()} />
+    <button title="Add Element" on:click={() => addElementModalState.open()}>
+      <Icon iconName="plus" />
+    </button>
 
-    <button class="circle fas fa-diagram-project" title="Sections" />
+    <button title="Sections">
+      <Icon iconName="chart-dots-3" />
+    </button>
 
-    <button class="circle fas fa-globe" title="Global styles" />
+    <button title="Global styles">
+      <Icon iconName="world" />
+    </button>
 
     <button title="Save desing"> Save desing </button>
   {/if}
 
-  <button class="circle fas fa-eye" title="Result" on:click={() => (isOptionsShowing = !isOptionsShowing)} />
+  <button title={isOptionsShowing ? 'Hide' : 'Show'} on:click={() => (isOptionsShowing = !isOptionsShowing)}>
+    {#if isOptionsShowing}
+      <Icon iconName="eye-closed" />
+    {:else}
+      <Icon iconName="eye" />
+    {/if}
+  </button>
 </section>
 
 <style>
@@ -77,16 +90,12 @@
     transition: transform 0.5s ease;
   }
 
-  button.circle {
-    width: 40px;
-    padding: 0px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+  button:has(svg) {
     border-radius: 50%;
   }
-  /*
-	.show_hide_panel.show {
-		transform: rotate(-180deg);
-	} */
+
+  :global(.global_panel > button > svg) {
+    height: 18px;
+    width: 18px;
+  }
 </style>

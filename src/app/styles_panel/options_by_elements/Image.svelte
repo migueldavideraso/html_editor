@@ -2,6 +2,7 @@
   import type { T_ChangeElementKey, T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
   import CustomButtons from '../CustomButtons.svelte'
   import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
+  import Details from '../style_options/Details.svelte'
   import FlexOptions from '../style_options/Flex.svelte'
   import Input from '../style_options/Input.svelte'
   import Margin from '../style_options/Margin.svelte'
@@ -17,8 +18,8 @@
   export let element = null
   export let changeElementKey: T_ChangeElementKey
 
-  const onChangeInput = (value: string) => {
-    changeElementKey('attributes', { ...element.attributes, src: value })
+  const onChangeInput = (attrName: string, value: string | null) => {
+    changeElementKey('attributes', { ...element.attributes, [attrName]: value })
   }
 </script>
 
@@ -40,6 +41,34 @@
 
 <FlexOptions {element} {changeStyleKey} />
 
-<Input value={element.attributes.src} onChange={onChangeInput} />
+<Details title="Attributes">
+  <Input
+    inputValue={element.attributes.src}
+    onChange={srcValue => {
+      onChangeInput('src', srcValue)
+    }}
+    placeholder="https://example.com"
+    label="Url"
+    type="url"
+  />
+
+  <Input
+    inputValue={element.attributes.alt}
+    onChange={altValue => {
+      onChangeInput('alt', altValue)
+    }}
+    label="Alt"
+    type="text"
+  />
+
+  <Input
+    inputValue={element.attributes.title}
+    onChange={titleValue => {
+      onChangeInput('title', titleValue || null)
+    }}
+    label="Title"
+    type="text"
+  />
+</Details>
 
 <CustomButtons {element} />

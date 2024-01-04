@@ -1,4 +1,6 @@
 <script>
+  import Icon from '../components/Icon.svelte'
+
   export let title = ''
 
   let isCollapsed = false
@@ -10,7 +12,9 @@
 
 <section class="styles_content">
   <button class="app--button" on:click={setCollapse}>
-    <span class="fas fa-angle-right {isCollapsed ? 'collaped' : ''}" />
+    <span class=" {isCollapsed ? 'collaped' : ''}">
+      <Icon iconName="chevron-right" />
+    </span>
     {title}
   </button>
 

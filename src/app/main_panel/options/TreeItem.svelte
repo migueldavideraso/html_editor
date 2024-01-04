@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Icon from '@/app/components/Icon.svelte'
   import { getElementChildrenStore, getElementDataStore, selectedSectionState } from '@/global_state/sections'
   import type { I_Element } from '@/types/main'
 
@@ -49,7 +50,7 @@
 <div class="item {selected ? 'selected' : ''}">
   {#if children.length}
     <button class="arrow {allow_show_children ? 'open' : 'close'}" on:click={() => showChildren(false)}>
-      <span class="fas fa-angle-right" />
+      <Icon iconName="chevron-right" />
     </button>
   {/if}
 

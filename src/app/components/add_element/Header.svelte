@@ -1,6 +1,7 @@
 <script>
   import { addElementModalState } from '@/global_state/modals'
   import { setMoveController } from '@/helpers/move_element'
+  import Icon from '../Icon.svelte'
 
   export let isMinified = false
   export let panelElement = null
@@ -24,9 +25,17 @@
 
   <span style="flex: auto;" />
 
-  <button class="fas fa-{!isMinified ? 'minus' : 'window-maximize'} close" on:click={() => (isMinified = !isMinified)} />
+  <button class="close" on:click={() => (isMinified = !isMinified)}>
+    {#if !isMinified}
+      <Icon iconName="minus" />
+    {:else}
+      <Icon iconName="window-maximize" />
+    {/if}
+  </button>
 
-  <button class="fas fa-times close" on:click={() => addElementModalState.close()} />
+  <button class="close" on:click={() => addElementModalState.close()}>
+    <Icon iconName="x" />
+  </button>
 </section>
 
 <style>
