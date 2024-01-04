@@ -74,11 +74,9 @@
     flex-direction: column;
     overflow: hidden;
     display: flex;
-    flex: auto;
     width: 340px;
     z-index: 1;
     grid-gap: 10px;
-    min-height: 400px;
     padding-bottom: 10px;
     border-radius: 7.5px;
     border: var(--main-border);

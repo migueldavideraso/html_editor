@@ -1,10 +1,12 @@
 <script lang="ts">
+  import Icon from '@/app/components/Icon.svelte'
+
   export let title: string = 'Untitled'
 </script>
 
-<details>
-  <summary class="app--button">
-    <i class="fas fa-angle-right" />
+<details class="select">
+  <summary class="app--button select_header">
+    <Icon iconName="chevron-right" class="icon" />
     {title}
   </summary>
 
@@ -14,32 +16,32 @@
 </details>
 
 <style>
-  details:hover {
+  .select:hover {
     opacity: 1 !important;
   }
 
-  details > .details-container {
+  .select > .details-container {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
   }
 
-  details > summary:hover {
+  .select > .select_header:hover {
     opacity: 0.8;
   }
 
-  details > summary {
+  .select > .select_header {
     font-size: 14px;
     line-height: normal;
     margin: 0 10px;
   }
 
-  details > summary > i {
+  :global(.select > .select_header > .icon) {
     transition-duration: 0.5s;
     transition-property: transform;
   }
 
-  details[open] > summary > i {
+  :global(.select[open] > .select_header > .icon) {
     transform: rotate(90deg);
   }
 </style>

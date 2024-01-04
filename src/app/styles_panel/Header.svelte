@@ -2,6 +2,7 @@
   import { selectedSectionState } from '@/global_state/sections'
   import { setMoveController } from '@/helpers/move_element'
   import { onMount } from 'svelte'
+  import Icon from '../components/Icon.svelte'
 
   export let element = {}
   export let isMinified = false
@@ -26,8 +27,18 @@
 <section class="header_section" bind:this={moveElement}>
   <span class="element_name"> {element?.name || ''} </span>
   <span style="flex: auto;" />
-  <button class="fas fa-{!isMinified ? 'minus' : 'window-maximize'} close" on:click={() => (isMinified = !isMinified)} />
-  <button class="fas fa-times close" on:click={closePanel} />
+
+  <button class="close" on:click={() => (isMinified = !isMinified)}>
+    {#if !isMinified}
+      <Icon iconName="minus" />
+    {:else}
+      <Icon iconName="window-maximize" />
+    {/if}
+  </button>
+
+  <button class="close" on:click={closePanel}>
+    <Icon iconName="x" />
+  </button>
 </section>
 
 <style>

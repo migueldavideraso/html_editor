@@ -1,6 +1,7 @@
 <script lang="ts">
-  import TreeItem from './TreeItem.svelte'
+  import Icon from '@/app/components/Icon.svelte'
   import { elementsChildrenState } from '@/global_state/sections'
+  import TreeItem from './TreeItem.svelte'
 
   let sectionsOfFirstLevel = []
 
@@ -16,7 +17,10 @@
 </script>
 
 <button class="app--button" on:click={setCollapse}>
-  <span class="fas fa-angle-right {isCollapsed ? 'collaped' : ''}" /> Elements
+  <span class=" {isCollapsed ? 'collaped' : ''}">
+    <Icon iconName="chevron-right" />
+  </span>
+  Elements
 </button>
 
 {#if isCollapsed}
