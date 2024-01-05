@@ -63,10 +63,10 @@ export const defaultComponentsData: { [id in T_Element_Type]: I_Element } = {
       width: '300px',
       height: '300px',
     },
-		attributes: {
+    attributes: {
       alt: 'Initial image',
       src: '/default-img.png',
-			title: null,
+      title: null,
     },
   },
 } as const
