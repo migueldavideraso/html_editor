@@ -1,0 +1,32 @@
+{
+  "version": "0.1.1",
+  "description": "Html Editor",
+  "name": "@design_to_code/editor",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/min.js",
+      "require": "./src/min.cjs"
+    },
+    "./style.css": {
+      "import": "./src/style.css",
+      "require": "./src/style.css"
+    }
+  },
+  "files": [
+    "src/*"
+  ],
+  "author": "design_to_code",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migueldavideraso/html_editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/migueldavideraso/html_editor/issues"
+  },
+  "homepage": "https://github.com/migueldavideraso/html_editor#readme"
+}

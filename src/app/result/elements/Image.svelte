@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { I_Element } from '@/types/main'
+
   export let element: I_Element
 
   $: attr = element.attributes

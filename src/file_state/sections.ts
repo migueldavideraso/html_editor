@@ -17,7 +17,7 @@ const defaultState: I_Elements_Table = {
     name: 'Page',
     parent: null,
     position: 1,
-		attributes: { },
+    attributes: {},
     styles: {
       overflow: 'auto',
       width: '100%',

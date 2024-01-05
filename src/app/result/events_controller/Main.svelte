@@ -33,7 +33,9 @@
   <Move {allowDrop} {allowDrag} {elementId} {componentElement} />
 {/if}
 
-<span class="events_element" id="events_element_{elementId}" bind:this={eventsElement} />
+<div class="events_element" id="events_element_{elementId}" bind:this={eventsElement}>
+  <span />
+</div>
 
 <style>
   .events_element {
@@ -43,5 +45,13 @@
     width: 0px;
     height: 0px;
     z-index: -99;
+  }
+
+  .events_element span {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
   }
 </style>
