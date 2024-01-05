@@ -1,41 +1,49 @@
 <script lang="ts">
-  export let value: string
   export let onChange: (value: string) => void
+  export let inputValue: string = ''
+  export let label: string
+
+  let restOfAttr = {}
+  const repeatedAttr = ['onChange', 'inputValue', 'label']
+
+  // The repeated attributes (export section with types above) are removed to avoid some boilerplate
+  for (const key in $$props) {
+    const value = $$props[key]
+
+    if (repeatedAttr.some(v => v === key)) {
+      continue
+    }
+
+    Object.assign(restOfAttr, { [key]: value })
+  }
 </script>
 
-<article class="custom-input-container">
-  <label for="custom-input">Url</label>
-
-  <input
-    class="custom-input"
-    type="url"
-    placeholder="https://example.com"
-    id="custom-input"
-    on:input={evt => onChange(evt.currentTarget.value)}
-    bind:value
-  />
-</article>
+{#if !label}
+  <input {...restOfAttr} on:input={evt => onChange(evt.currentTarget.value)} value={inputValue} />
+{:else}
+  <label class="input-container">
+    {label}:
+    <input {...restOfAttr} on:input={evt => onChange(evt.currentTarget.value)} value={inputValue} />
+  </label>
+{/if}
 
 <style>
-  .custom-input-container {
-    margin: 0 10px;
-  }
-
-  .custom-input-container > label {
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     font-size: 0.78rem;
   }
 
-  .custom-input-container .custom-input {
-    background: transparent;
-    display: flex;
+  input {
     border-radius: 5px;
     padding: 10px 12.5px;
     color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.15);
-    width: 100%;
+    max-width: 100% !important;
   }
 
-  .custom-input-container .custom-input::placeholder {
+  input::placeholder {
     opacity: 0.75;
   }
 </style>
