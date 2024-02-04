@@ -3,16 +3,21 @@
 
   import StylesButton from '../../StylesButton.svelte'
   import BorderInput from './BorderInput.svelte'
+  import { getElementState } from '@/global_state/_element'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
 
   export let element: I_Element
 
-  export let deleteStyleKeys: (arr: string[]) => void = () => {}
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  const elementStore = getElementState(element.id)
 
   const customBorders = ['border-top', 'border-left', 'border-right', 'border-bottom']
   let border_type = 'None'
 
-  if (customBorders.some(border => element.styles[border] && element.styles[border] !== 'none')) {
+  function existCustomBorder (border: string) {
+    return element.styles[border] && element.styles[border] !== 'none'
+  }
+
+  if (customBorders.some(existCustomBorder)) {
     border_type = 'Custom Borders'
   } else if (element.styles.border === 'none') {
     border_type = 'None'
@@ -22,13 +27,13 @@
 
   const onChangeBorder = (value: string) => {
     if (value === 'None') {
-      deleteStyleKeys(customBorders)
-      changeStyleKey('border', 'none')
+      elementStore.deleteStyles(customBorders)
+      elementStore.changeStyles([['border', 'none']])
     } else if (value === 'Border') {
-      deleteStyleKeys(customBorders)
-      changeStyleKey('border', '1px solid #000000')
+      elementStore.deleteStyles(customBorders)
+      elementStore.changeStyles([['border', '1px solid #000000']])
     } else if (value === 'Custom Borders') {
-      changeStyleKey('border', 'none')
+      elementStore.changeStyles([['border', 'none']])
     }
 
     // This update the border input value
@@ -41,7 +46,10 @@
 
 <StylesButton title="Border">
   <div class="input_group">
-    <select bind:value={border_type} on:change={e => onChangeBorder(e.currentTarget.value)}>
+    <select
+      bind:value={border_type}
+      on:change={e => onChangeBorder(e.currentTarget.value)}
+    >
       <option>None</option>
       <option>Border</option>
       <option>Custom Borders</option>
@@ -49,15 +57,38 @@
   </div>
 
   {#if border_type === 'Border'}
-    <BorderInput value={element.styles.border} onChange={value => changeStyleKey('border', value)} />
+
+    <BorderInput
+      value={getStyleKey(element, 'border')}
+      onChange={getChangeStyleHandler(elementStore, 'border')}
+    />
+
   {:else if border_type === 'Custom Borders'}
-    <BorderInput title="top:" value={element.styles['border-top']} onChange={value => changeStyleKey('border-top', value)} />
 
-    <BorderInput title="bottom:" value={element.styles['border-bottom']} onChange={value => changeStyleKey('border-bottom', value)} />
+    <BorderInput
+      title="top:"
+      value={getStyleKey(element, 'border-top')}
+      onChange={getChangeStyleHandler(elementStore, 'border-top')}
+    />
 
-    <BorderInput title="left:" value={element.styles['border-left']} onChange={value => changeStyleKey('border-left', value)} />
+    <BorderInput
+      title="bottom:"
+      value={getStyleKey(element, 'border-bottom')}
+      onChange={getChangeStyleHandler(elementStore, 'border-bottom')}
+    />
 
-    <BorderInput title="right:" value={element.styles['border-right']} onChange={value => changeStyleKey('border-right', value)} />
+    <BorderInput
+      title="left:"
+      value={getStyleKey(element, 'border-left')}
+      onChange={getChangeStyleHandler(elementStore, 'border-left')}
+    />
+
+    <BorderInput
+      title="right:"
+      value={getStyleKey(element, 'border-right')}
+      onChange={getChangeStyleHandler(elementStore, 'border-right')}
+    />
+
   {/if}
 </StylesButton>
 

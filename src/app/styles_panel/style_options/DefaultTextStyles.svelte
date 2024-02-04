@@ -3,14 +3,14 @@
 
   import TextEditor from '../components/text_editor/Main.svelte'
   import DefaultBoxStyles from './DefaultBoxStyles.svelte'
-  import type { T_ChangeElementKey, T_ChangeStyleKey } from '@/types/style_functions'
-
-  export let changeStyleKey: T_ChangeStyleKey
-  export let changeElementKey: T_ChangeElementKey
+  import { getElementState } from '@/global_state/_element'
 
   export let element: I_Element
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
-<DefaultBoxStyles {element} {changeStyleKey} />
+<DefaultBoxStyles {element} />
 
-<TextEditor {element} {changeElementKey} />
+<TextEditor {element} setText={elementStore.setText} />

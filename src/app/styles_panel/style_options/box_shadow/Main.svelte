@@ -3,21 +3,24 @@
 
   import StylesButton from '../../StylesButton.svelte'
   import Item from './Item.svelte'
+  import { getElementState } from '@/global_state/_element'
 
   export let element: I_Element
 
-  export let deleteStyleKeys: (arr: string[]) => void = () => {}
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
-
+  const elementStore = getElementState(element.id)
   const boxShadow = element?.styles?.['box-shadow']
+
   let items = boxShadow ? boxShadow.split(',') : []
 
   const addItem = () => {
     items = [...items, '0px 0px 2px 0px  #00000055']
   }
 
-  $: {
-    items.length ? changeStyleKey('box-shadow', items.join(',')) : deleteStyleKeys(['box-shadow'])
+  $: if (items.length) {
+    const value = items.join(',')
+    elementStore.changeStyles([['box-shadow', value]])
+  } else {
+    elementStore.deleteStyles(['box-shadow'])
   }
 </script>
 

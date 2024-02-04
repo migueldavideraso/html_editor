@@ -7,30 +7,27 @@
   import Position from '../style_options/Position.svelte'
   import Overflow from '../style_options/Overflow.svelte'
   import DefaultBoxStyles from '../style_options/DefaultBoxStyles.svelte'
-
   import CustomButtons from '../CustomButtons.svelte'
-  import type { T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
+  import type { I_Element } from '@/types/main'
 
-  export let element = null
+  export let element: I_Element = null
 
-  export let changeStyleKey: T_ChangeStyleKey
-  export let deleteStyleKeys: T_DeleteStyleKeys
 </script>
 
-<DefaultBoxStyles {element} {changeStyleKey} />
+<DefaultBoxStyles {element} />
 
-<Position {element} {changeStyleKey} />
+<Position {element} />
 
-<Border {element} {changeStyleKey} {deleteStyleKeys} />
+<Border {element} />
 
-<Shadow {element} {changeStyleKey} {deleteStyleKeys} />
+<Shadow {element} />
 
-<Corner {element} {changeStyleKey} {deleteStyleKeys} />
+<Corner {element} />
 
-<Padding {element} {changeStyleKey} />
+<Padding {element} />
 
-<Margin {element} {changeStyleKey} />
+<Margin {element} />
 
-<Overflow {element} {changeStyleKey} />
+<Overflow {element} />
 
 <CustomButtons {element} />

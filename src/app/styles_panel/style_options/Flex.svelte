@@ -3,10 +3,15 @@
 
   import StylesButton from '../StylesButton.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
+  import NumberInput from '../components/NumberInput.svelte'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
 
+  console.log(element)
+
+  const elementStore = getElementState(element.id)
   let allowShow = false
 
   $: {
@@ -14,6 +19,8 @@
     const parentElementDisplay = getComputedStyle(parentElement).display
 
     allowShow = parentElementDisplay === 'flex' || parentElementDisplay === 'inline-flex'
+
+    console.log(parentElementDisplay)
   }
 </script>
 
@@ -28,21 +35,31 @@
       <SizeInputs
         units={['px', '%', 'rem']}
         optionsTypes={['numeric', 'unset']}
-        optionValue={element.styles['flex-basis'] || ''}
-        onChange={value => changeStyleKey('flex-basis', value)}
+        optionValue={getStyleKey(element, 'flex-basis') || ''}
+        onChange={getChangeStyleHandler(elementStore, 'flex-basis')}
       />
     </div>
 
     <div class="input_group">
+
       <div class="title"> Grow: </div>
 
-      <input on:change={e => changeStyleKey('flex-grow', e.currentTarget.value)} bind:value={element.styles['flex-grow']} min="0" type="number" />
+      <NumberInput
+        onChange={getChangeStyleHandler(elementStore, 'flex-grow')}
+        value={getStyleKey(element, 'flex-grow')}
+      />
+
     </div>
 
     <div class="input_group">
+
       <div class="title"> Shrink: </div>
 
-      <input on:change={e => changeStyleKey('flex-shrink', e.currentTarget.value)} bind:value={element.styles['flex-shrink']} min="0" type="number" />
+      <NumberInput
+        onChange={getChangeStyleHandler(elementStore, 'flex-shrink')}
+        value={getStyleKey(element, 'flex-shrink')}
+      />
+
     </div>
   </StylesButton>
 {/if}
@@ -56,7 +73,7 @@
     margin: 0px;
   }
 
-  .input_group input {
+  .input_group :global(input) {
     max-width: 100px;
   }
 </style>

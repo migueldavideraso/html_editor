@@ -1,6 +1,5 @@
 <script lang="ts">
   import DefaultTextStyles from '../style_options/DefaultTextStyles.svelte'
-
   import Margin from '../style_options/Margin.svelte'
   import Overflow from '../style_options/Overflow.svelte'
   import Padding from '../style_options/Padding.svelte'
@@ -8,32 +7,28 @@
   import Border from '../style_options/border/Main.svelte'
   import Shadow from '../style_options/box_shadow/Main.svelte'
   import Corner from '../style_options/corner/Main.svelte'
-
-  import type { T_ChangeElementKey, T_ChangeStyleKey, T_DeleteStyleKeys } from '@/types/style_functions'
   import CustomButtons from '../CustomButtons.svelte'
+  import type { I_Element } from '@/types/main'
 
-  export let element = null
+  export let element: I_Element = null
 
-  export let changeStyleKey: T_ChangeStyleKey
-  export let deleteStyleKeys: T_DeleteStyleKeys
-  export let changeElementKey: T_ChangeElementKey
 </script>
 
-<DefaultTextStyles {element} {changeStyleKey} {changeElementKey} />
+<DefaultTextStyles {element} />
 
-<Position {element} {changeStyleKey} />
+<Position {element} />
 
-<Border {element} {changeStyleKey} {deleteStyleKeys} />
+<Border {element} />
 
-<Shadow {element} {changeStyleKey} {deleteStyleKeys} />
+<Shadow {element} />
 
-<Corner {element} {changeStyleKey} {deleteStyleKeys} />
+<Corner {element} />
 
-<Padding {element} {changeStyleKey} />
+<Padding {element} />
 
-<Margin {element} {changeStyleKey} />
+<Margin {element} />
 
-<Overflow {element} {changeStyleKey} />
+<Overflow {element} />
 
 <CustomButtons {element} />
 

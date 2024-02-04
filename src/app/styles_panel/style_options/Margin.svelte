@@ -4,8 +4,13 @@
   import StylesButton from '../StylesButton.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
+
   export let element: I_Element
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <StylesButton title="Margin">
@@ -16,8 +21,8 @@
       <SizeInputs
         units={['px', '%', 'rem']}
         optionsTypes={['numeric', 'unset', 'auto']}
-        optionValue={element.styles['margin-top'] || ''}
-        onChange={value => changeStyleKey('margin-top', value)}
+        optionValue={getStyleKey(element, 'margin-top')}
+        onChange={getChangeStyleHandler(elementStore, 'margin-top')}
       />
     </div>
 
@@ -27,8 +32,8 @@
       <SizeInputs
         units={['px', '%', 'rem']}
         optionsTypes={['numeric', 'unset', 'auto']}
-        optionValue={element.styles['margin-bottom'] || ''}
-        onChange={value => changeStyleKey('margin-bottom', value)}
+        optionValue={getStyleKey(element, 'margin-bottom')}
+        onChange={getChangeStyleHandler(elementStore, 'margin-bottom')}
       />
     </div>
 
@@ -38,8 +43,8 @@
       <SizeInputs
         units={['px', '%', 'rem']}
         optionsTypes={['numeric', 'unset', 'auto']}
-        optionValue={element.styles['margin-left'] || ''}
-        onChange={value => changeStyleKey('margin-left', value)}
+        optionValue={getStyleKey(element, 'margin-left')}
+        onChange={getChangeStyleHandler(elementStore, 'margin-left')}
       />
     </div>
 
@@ -49,8 +54,8 @@
       <SizeInputs
         units={['px', '%', 'rem']}
         optionsTypes={['numeric', 'unset', 'auto']}
-        optionValue={element.styles['margin-right'] || ''}
-        onChange={value => changeStyleKey('margin-right', value)}
+        optionValue={getStyleKey(element, 'margin-right')}
+        onChange={getChangeStyleHandler(elementStore, 'margin-right')}
       />
     </div>
   </section>

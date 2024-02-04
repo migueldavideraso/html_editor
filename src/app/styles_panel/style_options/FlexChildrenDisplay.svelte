@@ -3,21 +3,31 @@
 
   import StylesButton from '../StylesButton.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
+  import Select from '../components/select/Select.svelte'
+  import Option from '../components/select/Option.svelte'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
+
   export let element: I_Element
+  
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <StylesButton title="Display of child elements">
   <div class="input_group">
     <div class="title"> Direction: </div>
 
-    <select bind:value={element.styles['flex-direction']} on:change={e => changeStyleKey('flex-direction', e.currentTarget.value)}>
-      <option value="row"> row </option>
-      <option value="row-reverse"> row reverse </option>
-      <option value="column"> column </option>
-      <option value="column-reverse"> column reverse </option>
-    </select>
+    <Select
+      value={getStyleKey(element, 'flex-direction')}
+      onChange={getChangeStyleHandler(elementStore, 'flex-direction')}
+    >
+      <Option value="row" text="row" />
+      <Option value="row-reverse" text="row reverse" />
+      <Option value="column" text="column" />
+      <Option value="column-reverse" text="column reverse" />
+    </Select>
   </div>
 
   <div class="input_group">
@@ -26,42 +36,51 @@
     <SizeInputs
       units={['px', '%', 'rem']}
       showOptionTypes={false}
-      optionValue={element.styles['grid-gap'] || ''}
-      onChange={value => changeStyleKey('grid-gap', value)}
+      optionValue={getStyleKey(element, 'grid-gap')}
+      onChange={getChangeStyleHandler(elementStore, 'grid-gap')}
     />
   </div>
 
   <div class="input_group">
     <div class="title"> Wrap: </div>
 
-    <select bind:value={element.styles['flex-wrap']} on:change={e => changeStyleKey('flex-wrap', e.currentTarget.value)}>
-      <option value="unset"> unset </option>
-      <option value="nowrap"> nowrap </option>
-      <option value="wrap"> wrap </option>
-      <option value="wrap-reverse"> wrap-reverse </option>
-    </select>
+    <Select
+      value={getStyleKey(element, 'flex-wrap')}
+      onChange={getChangeStyleHandler(elementStore, 'flex-wrap')}
+    >
+      <Option value="unset" text="unset" />
+      <Option value="nowrap" text="nowrap" />
+      <Option value="wrap" text="wrap" />
+      <Option value="wrap-reverse" text="wrap-reverse" />
+    </Select>
   </div>
 
   <div class="input_group">
     <div class="title"> Align: </div>
 
-    <select bind:value={element.styles['align-content']} on:change={e => changeStyleKey('align-content', e.currentTarget.value)}>
-      <option value="unset"> unset </option>
-      <option value="flex-start"> start </option>
-      <option value="center"> center </option>
-      <option value="flex-end"> end </option>
-    </select>
+    <Select
+      value={getStyleKey(element, 'align-content')}
+      onChange={getChangeStyleHandler(elementStore, 'align-content')}
+    >
+      <Option value="unset" text="unset" />
+      <Option value="flex-start" text="start" />
+      <Option value="center" text="center" />
+      <Option value="flex-end" text="end" />
+    </Select>
   </div>
 
   <div class="input_group">
     <div class="title"> Justify: </div>
 
-    <select bind:value={element.styles['justify-content']} on:change={e => changeStyleKey('justify-content', e.currentTarget.value)}>
-      <option value="unset"> unset </option>
-      <option value="flex-start"> start </option>
-      <option value="center"> center </option>
-      <option value="flex-end"> end </option>
-    </select>
+    <Select
+      value={getStyleKey(element, 'justify-content')}
+      onChange={getChangeStyleHandler(elementStore, 'justify-content')}
+    >
+      <Option value="unset" text="unset" />
+      <Option value="flex-start" text="start" />
+      <Option value="center" text="center" />
+      <Option value="flex-end" text="end" />
+    </Select>
   </div>
 </StylesButton>
 

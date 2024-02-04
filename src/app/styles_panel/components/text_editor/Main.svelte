@@ -6,7 +6,7 @@
   import { createEditor, getTextByHtml } from './controller'
 
   export let element: I_Element
-  export let changeElementKey: (key: string, value: string) => void = () => {}
+  export let setText: (text: string) => void = () => {}
 
   let editor = null
   let editorElement = null
@@ -18,7 +18,7 @@
 
     editor = createEditor({ editorElementContainer, editorElement })
     editor.on('text-change', function (delta, oldDelta, source) {
-      changeElementKey('text', getTextByHtml(textEditorElement.innerHTML))
+      setText(getTextByHtml(textEditorElement.innerHTML))
     })
 
     textEditorElement = editorElementContainer.querySelector('.ql-editor')

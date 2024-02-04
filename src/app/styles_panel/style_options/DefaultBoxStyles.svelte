@@ -1,12 +1,16 @@
 <script lang="ts">
   import type { I_Element } from '@/types/main'
+  import { getElementState } from '@/global_state/_element'
 
   import ColorPicker from '../components/ColorPicker.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
   export let showFill = true
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <section class="app--main_options_section {showFill ? 'show-fill' : ''}">
@@ -20,13 +24,26 @@
   </section>
 
   <section class="row">
+
     {#if showFill}
-      <ColorPicker color={element.styles['background-color']} onChange={value => changeStyleKey('background-color', value)} />
+      <ColorPicker
+        color={getStyleKey(element, 'background-color')}
+        onChange={getChangeStyleHandler(elementStore, 'background-color')}
+      />
     {/if}
 
-    <SizeInputs units={['px', '%', 'rem']} optionValue={element.styles.width || ''} onChange={value => changeStyleKey('width', value)} />
+    <SizeInputs
+      units={['px', '%', 'rem']}
+      optionValue={getStyleKey(element, 'width')}
+      onChange={getChangeStyleHandler(elementStore, 'width')}
+    />
 
-    <SizeInputs units={['px', '%', 'rem']} optionValue={element.styles.height || ''} onChange={value => changeStyleKey('height', value)} />
+    <SizeInputs
+      units={['px', '%', 'rem']}
+      optionValue={getStyleKey(element, 'height')}
+      onChange={getChangeStyleHandler(elementStore, 'height')}
+    />
+
   </section>
 </section>
 

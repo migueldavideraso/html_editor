@@ -2,9 +2,15 @@
   import type { I_Element } from '@/types/main'
 
   import StylesButton from '../StylesButton.svelte'
+  import Option from '../components/select/Option.svelte'
+  import Select from '../components/select/Select.svelte'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <StylesButton title="Overflow">
@@ -12,23 +18,29 @@
     <div class="input_group">
       <div class="title">Overflow x</div>
 
-      <select value={element.styles['overflow-x'] || 'visible'} on:change={e => changeStyleKey('overflow-x', e.currentTarget.value)}>
-        <option value="visible">Content will not be clipped</option>
-        <option value="scroll">Add scrollbars</option>
-        <option value="auto">Add scrollbars only when necessary</option>
-        <option value="hidden">Hide overflow content</option>
-      </select>
+      <Select
+        value={getStyleKey(element, 'overflow-x') || 'visible'}
+        onChange={getChangeStyleHandler(elementStore, 'overflow-x')}
+      >
+        <Option value="visible" text="Content will not be clipped" />
+        <Option value="scroll" text="Add scrollbars" />
+        <Option value="auto" text="Add scrollbars only when necessary" />
+        <Option value="hidden" text="Hide overflow content" />
+      </Select>
     </div>
 
     <div class="input_group">
       <div class="title">Overflow y</div>
 
-      <select value={element.styles['overflow-y'] || 'visible'} on:change={e => changeStyleKey('overflow-y', e.currentTarget.value)}>
-        <option value="visible">Content will not be clipped</option>
-        <option value="scroll">Add scrollbars</option>
-        <option value="auto">Add scrollbars only when necessary</option>
-        <option value="hidden">Hide overflow content</option>
-      </select>
+      <Select
+        value={getStyleKey(element, 'overflow-y') || 'visible'}
+        onChange={getChangeStyleHandler(elementStore, 'overflow-y')}
+      >
+        <Option value="visible" text="Content will not be clipped" />
+        <Option value="scroll" text="Add scrollbars" />
+        <Option value="auto" text="Add scrollbars only when necessary" />
+        <Option value="hidden" text="Hide overflow content" />
+      </Select>
     </div>
   </section>
 </StylesButton>

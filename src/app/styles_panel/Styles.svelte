@@ -17,40 +17,11 @@
     }, 100)
   }
 
-  const changeElementKey = (key: string, value: string) => {
-    setFileElement(element.id, {
-      ...element,
-      [key]: value,
-    })
-  }
-
-  const changeStyleKey = (key: string, value: string) => {
-    setFileElement(element.id, {
-      ...element,
-      styles: {
-        ...element.styles,
-        [key]: value,
-      },
-    })
-  }
-
-  const deleteStyleKeys = (keys: string[]) => {
-    element.styles = element.styles || {}
-
-    keys.forEach(key => {
-      delete element.styles[key]
-    })
-
-    setFileElement(element.id, {
-      ...element,
-      styles: element.styles,
-    })
-  }
 </script>
 
 <section class="styles_section">
   {#if showOptions}
-    <Options {element} {changeStyleKey} {deleteStyleKeys} {changeElementKey} />
+    <Options {element} />
   {/if}
 </section>
 

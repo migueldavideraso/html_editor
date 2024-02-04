@@ -3,18 +3,28 @@
 
   import StylesButton from '../StylesButton.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
+  import Select from '../components/select/Select.svelte'
+  import Option from '../components/select/Option.svelte'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
   export let element: I_Element
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <StylesButton title="Position">
-  <select value={element.styles.position} on:change={e => changeStyleKey('position', e.currentTarget.value)}>
-    <option value="relative"> Relative </option>
-    <option value="absolute"> Absolute </option>
-    <option value="sticky"> sticky </option>
-    <option value="fixed"> Fixed </option>
-  </select>
+
+  <Select
+    value={getStyleKey(element, 'position')}
+    onChange={getChangeStyleHandler(elementStore, 'position')}
+  >
+    <Option value="relative" text="Relative" />
+    <Option value="absolute" text="Absolute" />
+    <Option value="sticky" text="sticky" />
+    <Option value="fixed" text="Fixed" />
+  </Select>
 
   <section class="elements_grid">
     <div class="input_group">
@@ -23,8 +33,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles.top || ''}
-        onChange={value => changeStyleKey('top', value)}
+        optionValue={getStyleKey(element, 'top')}
+        onChange={getChangeStyleHandler(elementStore, 'top')}
       />
     </div>
 
@@ -34,8 +44,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles.bottom || ''}
-        onChange={value => changeStyleKey('bottom', value)}
+        optionValue={getStyleKey(element, 'bottom')}
+        onChange={getChangeStyleHandler(elementStore, 'bottom')}
       />
     </div>
 
@@ -45,8 +55,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles.left || ''}
-        onChange={value => changeStyleKey('left', value)}
+        optionValue={getStyleKey(element, 'left')}
+        onChange={getChangeStyleHandler(elementStore, 'left')}
       />
     </div>
 
@@ -56,8 +66,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles.right || ''}
-        onChange={value => changeStyleKey('right', value)}
+        optionValue={getStyleKey(element, 'right')}
+        onChange={getChangeStyleHandler(elementStore, 'right')}
       />
     </div>
   </section>

@@ -3,34 +3,39 @@
 
   import StylesButton from '../../StylesButton.svelte'
   import CornerInput from './CornerInput.svelte'
+  import { getElementState } from '@/global_state/_element'
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
 
   export let element: I_Element
 
-  export let deleteStyleKeys: (arr: string[]) => void = () => {}
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  const corners = ['border-top-left-radius', 'border-top-right-radius', 'border-bottom-left-radius', 'border-bottom-right-radius']
+  const elementStore = getElementState(element.id)
 
   let corner_type = 'None'
 
-  if (element.styles['border-radius'] === 'none') {
+  if (getStyleKey(element, 'border-radius') === 'none') {
     corner_type = 'None'
-  } else if (element.styles['border-radius'] !== 'none') {
+  } else if (getStyleKey(element, 'border-radius') !== 'none') {
     corner_type = 'Corner'
   } else {
     corner_type = 'Custom Corners'
   }
 
-  const onChangeCorner = value => {
+  const onChangeCorner = (value: string) => {
+
     if (value === 'None') {
-      deleteStyleKeys(['border-top-left-radius', 'border-top-right-radius', 'border-bottom-left-radius', 'border-bottom-right-radius'])
-
-      changeStyleKey('border-radius', 'none')
-    } else if (value === 'Corner') {
-      element.styles['border-radius'] = ''
-
-      deleteStyleKeys(['border-top-left-radius', 'border-top-right-radius', 'border-bottom-left-radius', 'border-bottom-right-radius'])
-    } else {
-      changeStyleKey('border-radius', 'none')
+      elementStore.deleteStyles(corners)
+      elementStore.changeStyles([ ['border-radius', 'none'] ])
+      return
     }
+    
+    if (value === 'Corner') {
+      elementStore.changeStyles([ ['border-radius', ''] ])
+      elementStore.deleteStyles(corners)
+      return
+    }
+
+    elementStore.changeStyles([ ['border-radius', 'none'] ])
   }
 </script>
 
@@ -44,31 +49,36 @@
   </div>
 
   {#if corner_type === 'Corner'}
-    <CornerInput value={element.styles['border-radius']} onChange={value => changeStyleKey('border-radius', value)} />
+
+    <CornerInput value={getStyleKey(element, 'border-radius')}
+      onChange={getChangeStyleHandler(elementStore, 'border-radius')}
+    />
   {:else if corner_type === 'Custom Corners'}
+
     <section class="elements_grid">
+
       <CornerInput
         title="top left:"
-        value={element.styles['border-top-left-radius']}
-        onChange={value => changeStyleKey('border-top-left-radius', value)}
+        value={getStyleKey(element, 'border-top-left-radius')}
+        onChange={getChangeStyleHandler(elementStore, 'border-top-left-radius')}
       />
 
       <CornerInput
         title="top right:"
-        value={element.styles['border-top-right-radius']}
-        onChange={value => changeStyleKey('border-top-right-radius', value)}
+        value={getStyleKey(element, 'border-top-right-radius')}
+        onChange={getChangeStyleHandler(elementStore, 'border-top-right-radius')}
       />
 
       <CornerInput
         title="bottom left:"
-        value={element.styles['border-bottom-left-radius']}
-        onChange={value => changeStyleKey('border-bottom-left-radius', value)}
+        value={getStyleKey(element, 'border-bottom-left-radius')}
+        onChange={getChangeStyleHandler(elementStore, 'border-bottom-left-radius')}
       />
 
       <CornerInput
         title="bottom right:"
-        value={element.styles['border-bottom-right-radius']}
-        onChange={value => changeStyleKey('border-bottom-right-radius', value)}
+        value={getStyleKey(element, 'border-bottom-right-radius')}
+        onChange={getChangeStyleHandler(elementStore, 'border-bottom-right-radius')}
       />
     </section>
   {/if}

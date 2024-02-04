@@ -4,8 +4,13 @@
   import StylesButton from '../StylesButton.svelte'
   import SizeInputs from '../components/SizeInputs.svelte'
 
-  export let changeStyleKey: (key: string, value: string) => void = () => {}
+  import { getChangeStyleHandler, getStyleKey } from '@/helpers/elements'
+  import { getElementState } from '@/global_state/_element'
+
   export let element: I_Element
+
+  const elementStore = getElementState(element.id)
+
 </script>
 
 <StylesButton title="Padding">
@@ -16,8 +21,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles['padding-top'] || ''}
-        onChange={value => changeStyleKey('padding-top', value)}
+        optionValue={getStyleKey(element, 'padding-top')}
+        onChange={getChangeStyleHandler(elementStore, 'padding-top')}
       />
     </div>
 
@@ -27,8 +32,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles['padding-bottom'] || ''}
-        onChange={value => changeStyleKey('padding-bottom', value)}
+        optionValue={getStyleKey(element, 'padding-bottom')}
+        onChange={getChangeStyleHandler(elementStore, 'padding-bottom')}
       />
     </div>
 
@@ -38,8 +43,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles['padding-left'] || ''}
-        onChange={value => changeStyleKey('padding-left', value)}
+        optionValue={getStyleKey(element, 'padding-left')}
+        onChange={getChangeStyleHandler(elementStore, 'padding-left')}
       />
     </div>
 
@@ -49,8 +54,8 @@
       <SizeInputs
         showOptionTypes={false}
         units={['px', '%', 'rem']}
-        optionValue={element.styles['padding-right'] || ''}
-        onChange={value => changeStyleKey('padding-right', value)}
+        optionValue={getStyleKey(element, 'padding-right')}
+        onChange={getChangeStyleHandler(elementStore, 'padding-right')}
       />
     </div>
   </section>
