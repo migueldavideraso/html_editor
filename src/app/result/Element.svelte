@@ -5,6 +5,7 @@
 
   import type { I_Element } from '@/types/main'
   import EventsController from './events_controller/Main.svelte'
+  import { getElementState } from '@/global_state/_element'
 
   export let elementId: I_Element['id'] = null
 
@@ -18,8 +19,10 @@
     children = state
   })
 
-  getElementDataStore(elementId).subscribe(state => {
-    element = state
+  const elementStore = getElementState(elementId)
+
+  elementStore.subscribe(state => {
+    element = state.element
   })
 
   afterUpdate(() => {
